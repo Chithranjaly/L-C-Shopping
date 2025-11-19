@@ -9,12 +9,19 @@ body {
 .header-row {
     border: 3px solid #390f0fb7;
     background-color: #390f0fe0;
-    padding: 10px 0;
+    padding: 10px 0px;
+    display: flex;
+    /* width: 100vw; */
+
+    justify-content: space-between;
     height: auto;
 }
 
-.button-col {
-    justify-content: right;
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* space between dropdown, search, and buttons */
 }
 
 .header-logo {
@@ -25,10 +32,14 @@ body {
     font-size: 2rem;
 }
 
-.col-12.d-flex.justify-content-end {
-    justify-content: center;
-    margin-top: 10px;
+.form-control {
+    width: 200px;
 }
+
+
+
+
+
 
 footer {
     background-color: #390f0fe3;
@@ -93,4 +104,51 @@ button a:hover {
 
 .items {
     display: grid;
+}
+
+.banner-jumbotron {
+    height: 50vh;
+    background-image: url("../images/banner1.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.dropdown-menu {
+    background-color: rgb(213, 176, 156);
+
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #fff !important;
+    color: #543333;
+}
+
+.dropdown-menu .dropdown-item {
+    background-color: rgb(213, 176, 156);
+    color: #543333;
+}
+
+.product_container {
+    background-color: #fff;
+    border: 3px rgb(205, 180, 180) solid;
+    height: 80vh;
+    margin-bottom: 3%;
+
+}
+
+.image_side {
+    border: 2px gray thick;
+    height: 500px;
+    width: 400px;
+    margin: 20px 0px 0px 80px;
+    /*top right down left  */
+}
+
+.details_side {
+    border: 2px gray thick;
+    height: 500px;
+    width: 400px;
+    margin: 20px 0px 0px 0px;
+    padding: 10px 0px 0px 20px;
+
 }

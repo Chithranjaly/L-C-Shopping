@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="checkout-wrapper container">
+    <div class="row g-4">
+
+        <!-- CART ITEMS -->
+        <div class="col-lg-8">
+            <div class="cart-item">
+                <div class="cart-item-img">
+                    <img src="{% static 'images/Mavi_jeans.jpg' %}" alt="">
+                </div>
+
+                <div class="cart-item-info">
+                    <h5>Product title</h5>
+                    <p>Color: Blue</p>
+                    <p>Size: XL</p>
+                </div>
+
+                <div class="cart-item-qty">
+                    <h5>Quantity</h5>
+                    <div class="qty-box">
+                        <button class="qty-btn"><i class="fa fa-minus"></i></button>
+                        <div class="qty-value">1</div>
+                        <button class="qty-btn"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="cart-item-price">
+                    <h5>Price</h5>
+                    <strong>£33</strong>
+                    <small>each</small>
+                </div>
+
+                <button class="remove-btn">Remove
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- CHECKOUT SUMMARY -->
+        <div class="col-lg-4">
+            <div class="checkout-summary">
+                <h5>Order Summary</h5>
+
+                <div class="summary-row">
+                    <span>Total Price</span>
+                    <span>£33.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span>£2.00</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Grand Total</span>
+                    <span>£35.00</span>
+                </div>
+
+                <hr>
+
+                <div class="payment-icons">
+                    <i class="fa-brands fa-cc-visa" style="color: blue;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="color: rgb(255, 0, 30); "></i>
+                    <i class="fa-brands fa-cc-paypal" style="color: rgba(0, 0, 255, 0.658); "></i>
+                    <i class="fa-brands fa-google-pay" style="color: rgb(23, 110, 15);"></i>
+                </div>
+
+                <button class="checkout-btn mt-3">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

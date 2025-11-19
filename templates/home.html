@@ -12,107 +12,35 @@
         <h1 class="display-4">Fluid jumbotron</h1>
         <h1 class="display-4">Fluid jumbotron</h1> -->
         <p class="lead">Explore our premium collections in Casual, Formal, Activewear and many more</p>
+
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title1</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title2</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title3</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title4</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
+<div class="container mt-4">
+    <div class="home-heading">
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Explore some of our premium products</h2>
+        <a href="{% url 'store' %}"><button class="btn all-products"> View all products</button></a>
 
+    </div>
+
+    <div class="row">
+        {% for product in products %}
         <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card" style="width: 100%; height: 99%;">
+                <a href="{{ product.get_url }}"><img src="{{ product.image.url }}" class="card-img-top mt-3 mb-3"
+                        alt="..."></a>
                 <div class="card-body">
-                    <h5 class="card-title">Card title5</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
+                    <a href="{{ product.get_url }}">
+                        <h5 class="card-title">{{ product.product_name }}</h5>
+                    </a>
+                    <h6>£{{ product.price}}</h6>
+                    <p class="card-text">{{ product.product_description | truncatechars:50 }}</p>
+                    <button class="btn"><a href="#">Add to basket</a></button>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title6</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title7</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card" style="width: 100%;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title8</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <button class="btn"><a href="#" class="text-decoration-none">Go somewhere</a></button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+
+
     </div>
 </div>
 {% endblock %}
