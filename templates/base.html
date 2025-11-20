@@ -22,55 +22,74 @@
     <!-- Header -->
 
     <header>
+        <div class="header-row px-3">
 
-        <div class="header-row d-flex justify-content-between align-items-center px-3">
-            <!-- Left: Logo -->
-            <div class="logo-header">
+            <!-- LEFT: LOGO -->
+            <div class="nav-left d-flex align-items-center">
                 <a href="{% url 'home' %}" class="text-decoration-none">
                     <div class="header-logo">L&C shopping</div>
                 </a>
             </div>
 
-            <!-- Right: Dropdown + Search + Buttons -->
-            <div class="right-section d-flex align-items-center gap-3">
-                <!-- Dropdown -->
+            <!-- CENTER: CATEGORY + STORE + SEARCH -->
+            <div class="nav-center d-flex align-items-center gap-3">
+
+                <!-- Categories -->
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
                         Categories
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'store' %}">All category</a>
-
                         {% for category in links %}
-                        <a class="dropdown-item" href="{{ category.get_url }}">{{category.category_name}}</a>
+                        <a class="dropdown-item" href="{{ category.get_url }}">
+                            {{ category.category_name }}
+                        </a>
                         {% endfor %}
-
                     </div>
                 </div>
 
+                <!-- Store Button -->
+                <a href="{% url 'store' %}" class="btn text-dark text-decoration-none"
+                    style="background-color: #EDE8D0;">Store</a>
+
                 <!-- Search -->
-                <form class="form-inline d-flex mx-2">
-                    <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="{% url 'search' %}" method="GET" class="form-inline d-flex">
+                    <input class="form-control mr-2" type="text" placeholder="Search" name="keyword">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
 
-                <!-- Login/Register -->
-                <div class="d-flex mx-2">
-                    <button class="btn btn-md mx-1">Login</button>
-                    <button class="btn btn-md mx-1">Register</button>
-                </div>
             </div>
-        </div>
 
+            <!-- RIGHT: LOGIN/REGISTER + CART ICON -->
+            <div class="nav-right d-flex align-items-center gap-2">
+
+                <a class="logReg text-decoration-non mx-1" style="color: rgb(248, 236, 170);">Login |
+                </a>
+                <a class="logReg text-decoration-non" style="color: rgb(248, 236, 170);">Register</a>
+
+                <!-- CART BUTTON -->
+                <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
+                    <i class="fa fa-shopping-cart"></i>
+
+                    <!-- cart item count -->
+                    <span class="cart-count-badge">
+                        {{ cart_count }}
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
     </header>
 
 
     <!-- content part -->
 
 
-
-    {% block content %}
-    {% endblock %}
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
 
 

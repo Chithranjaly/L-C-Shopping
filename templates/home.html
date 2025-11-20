@@ -34,7 +34,9 @@
                     </a>
                     <h6>£{{ product.price}}</h6>
                     <p class="card-text">{{ product.product_description | truncatechars:50 }}</p>
-                    <button class="btn"><a href="#">Add to basket</a></button>
+                    <a href="{{ product.get_url }}" class="btn text-light text-decoration-none"
+                        style="background-color: rgb(108, 62, 62);">Add to
+                        basket</a>
                 </div>
             </div>
         </div>

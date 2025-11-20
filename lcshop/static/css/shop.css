@@ -11,10 +11,10 @@ body {
     background-color: #390f0fe0;
     padding: 10px 0px;
     display: flex;
-    /* width: 100vw; */
-
     justify-content: space-between;
     height: auto;
+    align-items: center;
+
 }
 
 .right-section {
@@ -36,7 +36,30 @@ body {
     width: 200px;
 }
 
+.nav-center {
+    flex: 1;
+    justify-content: center;
+    gap: .5rem;
 
+
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+
+.main-content {
+    flex: 1;
+
+}
 
 
 
@@ -65,10 +88,24 @@ main.container {
     }
 }
 
+.logReg {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular';
+    color: rgb(230, 230, 104);
+    font-size: larger;
+}
+
+.cart-btn {
+    border-radius: 20px;
+    margin-left: 5px;
+    /* background-color: #f6f6f4; */
+}
+
 button {
     background-color: #EDE8D0;
 
 }
+
+
 
 button a {
     color: #543333;
@@ -364,6 +401,23 @@ button a:hover {
     font-size: 16px;
     transition: 0.2s;
 }
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 50vh;
+    /* optional, but it makes the empty state vertically centered */
+    text-align: center;
+}
+
+.empty a {
+    margin-top: 15px;
+    /* spacing below the text */
+}
+
 
 .checkout-btn:hover {
     background: #2c241d;
