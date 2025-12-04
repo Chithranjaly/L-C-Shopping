@@ -27,20 +27,30 @@
 
                 <div class="cart-item-info">
                     <h5>{{ cart_item.product.product_name }}</h5>
-                    <p>Color: Blue</p>
-                    <p>Size: XL</p>
+                    {% if cart_item.variations.all %}
+                    {% for item in cart_item.variations.all %}
+                    {{ item.variation_name | capfirst }} : {{ item.variation_value | capfirst }}<br>
+                    {% endfor %}
+                    {% endif %}
+
+
                 </div>
 
                 <div class="cart-item-qty">
                     <h5>Quantity</h5>
                     <div class="qty-box">
-                        <a href="{% url 'remove_cart' cart_item.product.id %}"
+                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
                             class="qty-btn text-muted tex-decoration-none">
                             <i class="fa fa-minus"></i></a>
                         <div class="qty-value">{{ cart_item.quantity }}</div>
-                        <a href="{% url 'add_cart' cart_item.product.id %}"
-                            class="qty-btn text-muted tex-decoration-none">
-                            <i class="fa fa-plus"></i></a>
+                        <form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
+                            {% csrf_token %}
+                            {% for item in cart_item.variations.all %}
+                            <input type="hidden" name="{{ item.variation_name}}" value="{{ item.variation_value}}">
+                            {% endfor %}
+                            <button type="submit" class="qty-btn text-muted tex-decoration-none">
+                                <i class="fa fa-plus"></i></button>
+                        </form>
                     </div>
                 </div>
 
@@ -50,7 +60,8 @@
                     <small>£ {{ cart_item.product.price }}each</small>
                 </div>
 
-                <a href="{% url 'delete_cart_item' cart_item.product.id %}"
+                <a href="{% url 'delete_cart_item' cart_item.product.id cart_item.id %}"
+                    onclick="return confirm('Are you sure you want to remove the item?')"
                     class="remove-btn text-light tex-decoration-none">Remove
                     <i class="fa fa-trash"></i>
                 </a>

@@ -35,36 +35,31 @@
             <!-- end of responsive star rating -->
             <p>{{ single_product.product_description }}</p>
 
-            <form class="form-group">
-                <b>Select size</b> <select class="form-control" style="width: 40%;">
+            <form action="{% url 'add_cart' single_product.id %}" method="POST" class="form-group">
+                {% csrf_token %}
+                <b>Select size</b> <select class="form-control" style="width: 40%;" name="size">
                     <option>Select size</option>
-                    <option>Xs</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
+                    {% for i in single_product.variation_set.sizes %}
+                    <option value="{{ i.variation_value  }}">{{ i.variation_value }}</option>
+                    {% endfor %}
+
                 </select>
-                <b>Select colour</b> <select class="form-control" style="width: 40%;">
+                <b>Select colour</b> <select class="form-control" name="color" style="width: 40%;">
                     <option>Select colour</option>
-                    <option>Blue</option>
-                    <option>Black</option>
-                    <option>Green</option>
-                    <option>Yellow</option>
-                    <option>Purple </option>
+                    {% for i in single_product.variation_set.colors %}
+                    <option value="{{ i.variation_value }}">{{ i.variation_value }}</option>
+                    {% endfor %}
                 </select>
+
+
                 {% if single_product.stock <= 0 %} <h5 style="color:red; margin-top:2px;">Out of stock </h5>
-                    {% else %}
-                    {% if in_cart %}
-                    <a class="btn btn-success mt-5 mx-5" style="background-color: rgb(45, 184, 45);">Added to cart
-                        <i class="fa-solid fa-check"></i></a>
-                    <a href=" {% url 'cart' %}" class="btn btn-primary mt-5 mx-5" style="background-color: blue;">View
-                        cart
-                        <i class="fa-solid fa-eye"></i></a>
+
+
+
                     {% else %}
 
-                    <a href=" {% url 'add_cart' single_product.id %}" class="btn btn-primary mt-5 mx-5">Add to cart
-                        <i class="fa-solid fa-cart-shopping"></i></a>
-                    {% endif %}
+                    <button type="submit" class="btn btn-primary   mt-5 mx-5">Add to cart
+                        <i class="fa-solid fa-cart-shopping"></i></button>
                     {% endif %}
 
             </form>
