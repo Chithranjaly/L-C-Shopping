@@ -7,6 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L&C Shopping</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/layout.css' %}" rel="stylesheet">
+
+    {% if '/product' in request.path %}
+        <link href="{% static 'css/product.css' %}" rel="stylesheet">
+    {% elif '/checkout' in request.path or '/cart' in request.path %}
+        <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+    {% endif %}
+
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -62,21 +72,44 @@
             </div>
 
             <!-- RIGHT: LOGIN/REGISTER + CART ICON -->
-            <div class="nav-right d-flex align-items-center gap-2">
+            <div class="nav-right text-end">
 
-                <a class="logReg text-decoration-non mx-1" style="color: rgb(248, 236, 170);">Login |
-                </a>
-                <a class="logReg text-decoration-non" style="color: rgb(248, 236, 170);">Register</a>
+                {% if user.is_authenticated %}
 
-                <!-- CART BUTTON -->
-                <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
-                    <i class="fa fa-shopping-cart"></i>
+                <!-- Line 1: Welcome -->
+                <div class="text-light mb-1">
+                    Welcome {{ user.first_name }}!
+                </div>
 
-                    <!-- cart item count -->
-                    <span class="cart-count-badge">
-                        {{ cart_count }}
-                    </span>
-                </a>
+                <!-- Line 2: Dashboard + Logout + Cart -->
+                <div class="d-flex justify-content-end align-items-center gap-3">
+                    <a href="{% url 'dashboard' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
+                        Dashboard |
+                    </a>
+
+                    <a href="{% url 'logout' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
+                        &nbsp;Logout
+                    </a>
+
+                    <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="cart-count-badge">{{ cart_count }}</span>
+                    </a>
+                </div>
+
+                {% else %}
+
+                <!-- Login/Register (same line) -->
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{% url 'login' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
+                        Login |
+                    </a>
+                    <a href="{% url 'register' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
+                        &nbsp; Register
+                    </a>
+                </div>
+
+                {% endif %}
 
             </div>
 

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card form-card">
+    <h2 class="py-3">Register</h2>
+    {% include 'alerts.html' %}
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3 form-row">
+            {{ field.label_tag }}
+            {{ field }}
+
+
+
+        </div>
+        {% endfor %}
+        {{ form.email.errors }}
+        {{ form.non_field_errors }}
+        <button class="btn reg_log_button">Login</button>
+    </form>
+
+</div>
+<p class="text-center">Already have an account?<a href="{% url 'login' %}">Log in</a></p>
+
+{% endblock %}

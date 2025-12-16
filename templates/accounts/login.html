@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if request.GET.command == 'verification' %}
+    <div class="container alert alert-info text-center mt-5" role="alert">
+        Thank you for registering with us. Please check your email {{request.GET.email}} for the verification link to complete the registration.
+    <br><br>
+    Already verified? <a href="{% url 'login' %}">Login</a>
+    </div>
+
+{% else %}
+<div class="card login-card">
+    {% include 'alerts.html' %}
+
+    <h2 class="py-3 text-center">Login</h2>
+    <!-- {% include 'alerts.html' %} -->
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <input type="email" class="form-control w-100" name="email" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter your email id ">
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control w-100" name="password" id="exampleInputPassword1"
+                placeholder="Enter your password ">
+        </div>
+
+        <button type="submit" class="btn reg_log_button w-100">Submit</button>
+    </form>
+
+</div>
+<p class="text-center"> Doesn't have an account?<a href="{% url 'register' %}">Register</a></p>
+
+{% endif %}
+{% endblock %}

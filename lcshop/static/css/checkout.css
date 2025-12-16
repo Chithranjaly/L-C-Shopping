@@ -1,0 +1,53 @@
+/* =======================
+   CART & CHECKOUT STYLES
+   ======================= */
+
+/* Checkout wrapper */
+.checkout-wrapper {
+    padding: 20px 0;
+}
+
+/* Cart items */
+.cart-item, .checkout-summary {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.cart-item-img img {
+    width: 100px;
+    height: auto;
+}
+
+.cart-item-info, .cart-item-qty, .cart-item-price {
+    margin-left: 10px;
+}
+
+.checkout-btn, .order-btn, .continue-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* Order summary */
+.checkout-summary h5 {
+    margin-bottom: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.summary-row.total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Empty cart */
+.empty {
+    text-align: center;
+    margin: 50px 0;
+}

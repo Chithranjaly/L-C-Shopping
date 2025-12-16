@@ -1,0 +1,46 @@
+/* =======================
+   LAYOUT / GRID STYLES
+   ======================= */
+
+/* Main content spacing */
+.main-content {
+    padding: 20px 0;
+    min-height: 70vh;
+}
+
+/* Container tweaks */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Home page section spacing */
+.home-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Card spacing */
+.card {
+    margin-bottom: 20px;
+}
+
+/* Form row / column spacing */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.card.form-card, .card.login-card {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Dashboard */
+.dashboard-nav, .dashboard-details {
+    min-height: 200px;
+}
