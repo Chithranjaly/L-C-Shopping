@@ -1,5 +1,4 @@
 import datetime
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from carts.models import CartItem
@@ -29,6 +28,7 @@ def place_order(request,total=0, quantity=0):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
+            print('form_valid')
             # store all the billing info in order table
             data = Order()
             data.first_name = form.cleaned_data['first_name']
@@ -42,7 +42,7 @@ def place_order(request,total=0, quantity=0):
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
             data.tax = tax
-            data.ip = request.META.get('REMOTE_ADDR')  #gives user-ip address 
+            data.ip = request.META.get('REMOTE_ADDR') #gives user-ip address 
             data.save()
 
 
@@ -55,7 +55,16 @@ def place_order(request,total=0, quantity=0):
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
+            print('success1')
+            if data:
+                print('success2')
+                print(data)
+            else:
+                print('fail')
             return redirect('checkout')
     else:
-        return redirect('checkout')
+        print('not post request')
+        return render(request, 'checkout.html', {'form': form, 'cart_items': cart_items, 'total': total, 'tax': tax, 'grand_total': grand_total})
+    print('somethings wrong!')
+    return redirect('checkout')
 

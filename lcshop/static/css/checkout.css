@@ -21,7 +21,8 @@
     margin-bottom: 15px;
 }
 .billing-form label {
-    font-weight: 600;
+    font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
     color: #3c3025;
     margin-bottom: 6px;
     display: block;
