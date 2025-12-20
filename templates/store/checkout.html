@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <div class="billing-details">
                 <h4 class="pt-4 px-3">Billing address</h4>
-                <form class="form-group billing-form" action="{% url '%}" method="POST">
+                <form class="form-group billing-form" method="POST">
                     {% csrf_token %}
                     <div class="name-section">
                         <label>First Name *</label>
@@ -38,7 +38,7 @@
                         <input type="text" class="form-control">
                     </div>
 
-                </form>
+               
             </div>
 
 
@@ -47,39 +47,53 @@
 
         <!-- CHECKOUT SUMMARY -->
         <div class="col-lg-6">
+            {% for cart_item in cart_items %}
             <div class="checkout-container">
                 <div class="cart-item">
                     <div class="cart-item-img">
-                        <img src="{% static 'images/Mavi_jeans.jpg' %}" alt="">
+                        <img src="{{ cart_item.product.image.url }}" alt="">
                     </div>
+                   
 
                     <div class="cart-item-info">
-                        <h5>Product title</h5>
-                        <p>Color: Blue</p>
-                        <p>Size: XL</p>
+                        <h5>{{ cart_item.product.product_name }}</h5>
+                        {% if cart_item.variations.all %}
+                            {% for item in cart_item.variations.all %}
+                                {{ item.variation_name | capfirst }} : {{  item.variation_value | capfirst}}<br>
+                            {% endfor %}
+                        {% endif %}
+
+                      
                     </div>
 
                     <div class="cart-item-qty">
                         <h5>Quantity</h5>
-                        <p class="mx-4">2</p>
+                        <p class="mx-4">{{cart_item.quantity}}</p>
                     </div>
 
                     <div class="cart-item-price">
                         <h5>Price</h5>
-                        <strong>£33</strong>
-                        <small>each</small>
+                        <strong>£ {{cart_item.sub_total}}</strong><br>
+                        <small>each £{{cart_item.product.price}}</small>
                     </div>
 
 
 
                 </div>
-                <button class="btn order-btn">Place order</button>
-                <button class="btn continue-btn">Continue shopping</button>
-
-
             </div>
+
+            {% endfor %}
+               
+
+
+        
+            <button class="btn order-btn" type="submit" name="submit">Place order</button>
+            <a href="{% url 'store' %}" class="btn continue-btn text-decoration-none text-dark">Continue shopping</a>
+
+
         </div>
     </div>
+</form>
 </div>
 
 {% endblock %}
