@@ -9,7 +9,8 @@
         <div class="col-lg-6">
             <div class="billing-details">
                 <h4 class="pt-4 px-3">Billing address</h4>
-                <form class="form-group billing-form">
+                <form class="form-group billing-form" action="{% url '%}" method="POST">
+                    {% csrf_token %}
                     <div class="name-section">
                         <label>First Name *</label>
                         <label>Last Name *</label>
