@@ -1,32 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content%}
+{% block content %}
 
-<section class="container mb-2 mx-4 p-2">
-            <h3> Welcome {{user.first_name}} {{user.last_name}}</h3>
+<section class="container my-5">
+    <h4 class="mb-4">Welcome {{ user.first_name }} {{ user.last_name }}</h4>
 
     <div class="row">
+        <!-- LEFT SIDEBAR -->
         <div class="col-md-3">
-            <div class="card dashboard-nav mt-5 p-4">
-                <ul class="nav-list">
-                    <li>something</li>
-                    <li>something</li>
-                    <li>something</li>
-                    <li>something</li>
+            <div class="card dashboard-nav">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item active">My order history</li>
+                    <li class="list-group-item">Transactions</li>
+                    <li class="list-group-item">Return & refunds</li>
+                    <li class="list-group-item">Settings</li>
+                    <li class="list-group-item">My Selling Items</li>
+                    <li class="list-group-item">Received orders</li>
                 </ul>
+                <div class="p-3">
+                    <a href="{% url 'logout' %}" class="btn w-100" style="background-color: #76573b; color: white   ;">
+                        Log out
+                    </a>
+                </div>
             </div>
         </div>
+
+        <!-- RIGHT CONTENT -->
         <div class="col-md-9">
-            <div class="card dashboard-details mt-5 p-4">
-                <p>urfgeyufdhfdgsdfghdfs</p>
-                <p>urfgeyufdhfdgsdfghdfs</p>    
-                <p>urfgeyufdhfdgsdfghdfs</p>
-                <p>urfgeyufdhfdgsdfghdfs</p>
+            <div class="card dashboard-details p-4">
+                <h6 class="mb-3">Order ID: 6123456789</h6>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <p><strong>Delivery to:</strong><br>
+                            Michael Jackson<br>
+                            Phone: +1234567890<br>
+                            Email: myname@pixsellz.com
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <p><strong>Payment</strong><br>
+                            Visa **** 4216<br>
+                            Total: $456
+                        </p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p>Product list will go here (table or cards)</p>
             </div>
         </div>
-
-
     </div>
-    
 </section>
+
 {% endblock %}

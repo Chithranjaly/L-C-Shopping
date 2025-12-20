@@ -398,14 +398,14 @@ input.form-control {
 /* ===========================
    DASHBOARD PAGE
    =========================== */
-.dashboard-nav,
+/* .dashboard-nav,
 .dashboard-details {
     background-color: rgb(168, 116, 90);
     border-radius: 10px;
     padding: 15px;
     margin-top: 15px;
-}
-
+} */
+/* 
 .nav-list {
     list-style: none;
     padding: 0;
@@ -417,7 +417,7 @@ input.form-control {
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 6px;
-}
+} */
 
 /* ===========================
    MEDIA QUERIES
