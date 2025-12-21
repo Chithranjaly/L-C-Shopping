@@ -218,4 +218,4 @@ def checkout(request,total=0,quantity=0,cart_items=None):
         'grand_total':grand_total,
     }
 
-    return render(request,'store/checkout.html',context)
+    return render(request,'orders/checkout.html',context)

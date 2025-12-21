@@ -10,11 +10,11 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
 
-    {% if '/product' in request.path %}
-        <link href="{% static 'css/product.css' %}" rel="stylesheet">
-    {% elif '/checkout' in request.path or '/cart' in request.path %}
-        <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
-    {% endif %}
+    
+    <link href="{% static 'css/product.css' %}" rel="stylesheet">
+    <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+
+    
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

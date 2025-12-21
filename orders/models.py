@@ -50,7 +50,7 @@ class Order(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     def full_address(self):
-        return f'{self.address_line_1} {self.address_line_2}'
+        return f'{self.address_line1} {self.address_line2}'
 
     def __str__(self):
         return self.first_name

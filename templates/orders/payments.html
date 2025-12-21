@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<h3 class="text-center">Review your order and make payment</h3>
+<div class="checkout-wrapper container">
+
+
+    <div class="row g-4">
+
+        <!-- billing details -->
+        <div class="col-lg-8">        
+            
+                <div class="card">
+                    <div class="card-header" style="height: 30%;">
+                        <b>Billing address</b>
+                    </div>
+                        <li class="list-group-item">
+                            <p class="mb-0">{{ order.full_name}}</p>
+                            <p class="mb-0">{{ order.full_address}}</p>
+                            <p class="mb-0">{{ order.city}}, {{ order.state}}</p>
+                            <p class="mb-0">{{ order.country}}</p>
+                            <p class="mb-0">{{ order.email}}   |   {{ order.phone}}</p>
+                            {% if order.order_note %}
+                            <b>Order note:</b>{{ order.order_note}}
+                            {% endif %}
+                        </li>
+                                          
+                </div>
+                <br>
+
+                <div class="card">
+                    <div class="card-header" style="height: 30%;">
+                        Payment methods
+                    </div>
+                        <li class="list-group-item">PayPal</li>
+                                              
+                </div>
+                <br>
+
+                <div class="card">
+                    <div class="card-header" style="height: 30%;">
+                        Review Products
+                    </div>
+                            {% for cart_item in cart_items %}
+                        <div class="checkout-container">
+                            <div class="cart-item">
+                                <div class="cart-item-img">
+                                    <img src="{{ cart_item.product.image.url }}" alt="">
+                                </div>
+                            
+
+                                <div class="cart-item-info">
+                                    <h5>{{ cart_item.product.product_name }}</h5>
+                                    {% if cart_item.variations.all %}
+                                        {% for item in cart_item.variations.all %}
+                                            {{ item.variation_name | capfirst }} : {{  item.variation_value | capfirst}}<br>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                
+                                </div>
+
+                                <div class="cart-item-qty">
+                                    <h5>Quantity</h5>
+                                    <p class="mx-4">{{cart_item.quantity}}</p>
+                                </div>
+
+                                <div class="cart-item-price">
+                                    <h5>Price</h5>
+                                    <strong>£ {{cart_item.sub_total}}</strong><br>
+                                    <small>each £{{cart_item.product.price}}</small>
+                                </div>
+
+
+
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                                              
+                </div>
+                <br>
+
+               
+               
+            
+          
+        </div>
+
+
+        <!-- CHECKOUT SUMMARY -->
+        <div class="col-lg-4">
+            <div class="checkout-summary">
+                <h5>Order Summary</h5>
+
+                <div class="summary-row">
+                    <span>Total Price:</span>
+                    <span style="text-align: right;">£ {{ total }}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tax:</span>
+                    <span class="amounts">£{{ tax }}</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Grand Total:</span>
+                    <span class="amounts">£ {{ grand_total }}</span>
+                </div>
+
+                <hr>
+
+                <div class="payment-icons" style="align-items: center;">
+                    <i class="fa-brands fa-cc-visa" style="color: blue;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="color: rgb(255, 0, 30); "></i>
+                    <i class="fa-brands fa-cc-paypal" style="color: rgba(0, 0, 255, 0.658); "></i>
+                    <i class="fa-brands fa-google-pay" style="color: rgb(23, 110, 15);"></i>
+                </div>
+
+                <a href="" class="btn checkout-btn mt-3 text-light w-100 text-decoration-none">Make Payment</a>
+                
+            </div>
+        </div>
+    </div>
+ 
+</div>
+
+{% endblock %}
