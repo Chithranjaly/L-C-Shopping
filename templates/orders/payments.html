@@ -113,19 +113,100 @@
 
                 <hr>
 
-                <div class="payment-icons" style="align-items: center;">
-                    <i class="fa-brands fa-cc-visa" style="color: blue;"></i>
-                    <i class="fa-brands fa-cc-mastercard" style="color: rgb(255, 0, 30); "></i>
-                    <i class="fa-brands fa-cc-paypal" style="color: rgba(0, 0, 255, 0.658); "></i>
-                    <i class="fa-brands fa-google-pay" style="color: rgb(23, 110, 15);"></i>
+                <div class="payment-icons" style="text-align: center;">
+                    <i class="fa-brands fa-cc-visa" style="color: blue; font-size: xx-large; "></i>
+                    <i class="fa-brands fa-cc-mastercard" style="color: rgb(255, 0, 30); font-size: xx-large;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="color: rgba(0, 0, 255, 0.658); font-size: xx-large; "></i>
+                    <i class="fa-brands fa-google-pay" style="color: rgb(23, 110, 15); font-size: xx-large;"></i>
                 </div>
+                <div id="paypal-button-container"></div>
 
-                <a href="" class="btn checkout-btn mt-3 text-light w-100 text-decoration-none">Make Payment</a>
+
                 
             </div>
         </div>
     </div>
  
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=AQuW-qR4AJc7n-zbMn72yAcf4Ohx17O4NPfa2TmbfRVl_QczuvhmguvRSbmV01ChKsMN1l-uQDrX1w9u&currency=GBP"></script>
+
+<script>
+    // using jQuery
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    var url = "{% url 'payments' %}";
+    var payment_method = 'PayPal';
+    var orderID = "{{order.order_number}}";
+    var redirect_url = "{% url 'order_complete' %}"
+
+    paypal.Buttons({
+
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: "{{ grand_total|floatformat:2 }}",
+                        currency_code: "GBP"
+                    }
+                }]
+            });
+        },
+
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                console.log(details);
+                sendData();
+                function sendData(){
+                    fetch(url, {
+                        method : "POST",
+                        headers : {
+                            "Content-type" : "application/json",
+                            "X-CSRFToken" : csrftoken,
+
+                        },
+                        body: JSON.stringify({
+                            orderID:orderID,
+                            transID:details.id,
+                            payment_method:payment_method,
+                            status: details.status,
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id='+data.transID;
+
+                    });
+                }
+
+            });
+        },
+
+        onCancel: function (data) {
+            alert("Payment cancelled");
+        },
+
+        onError: function (err) {
+            console.error(err);
+            alert("Something went wrong with PayPal");
+        }
+
+    }).render("#paypal-button-container");
+</script>
+
 
 {% endblock %}
