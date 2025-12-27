@@ -155,17 +155,20 @@ def order_complete(request):
     print(transID)
     try:
         order = Order.objects.get(order_number=order_number,is_ordered=True)
+        print(order)
         ordered_products = OrderProduct.objects.filter(order_id=order.id)
         payment = Payment.objects.get(payment_id=transID)
         subtotal = 0
-        for i in ordered_products:
-            subtotal += i.product_price * i.quantity
+        for item in ordered_products:
+            item.subtotal = item.product_price * item.quantity
+            subtotal += item.subtotal
         context = {
             'order':order,
             'ordered_products':ordered_products,
             'order_number':order.order_number,
             'transID':payment.payment_id,
             'subtotal':subtotal,
+            'payment':payment,
         }
         print('success')
         return render(request,'orders/order_complete.html',context)

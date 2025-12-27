@@ -23,11 +23,12 @@
                 <h3>Invoice</h3>
                 <p><strong>Order #:</strong> {{ order_number}}</p>
                 <p><strong>Transaction ID:</strong> {{ transID }}</p>
-                <p><strong>Status ID:</strong> {{ payment.status }}</p>
             </div>
 
             <div class="invoice-date">
                 <p><strong>Date:</strong> {{ order.created_at }}</p>
+                <p><strong>Payment Status :</strong> {{ payment.status }}</p>
+
             </div>
         </div>
 
@@ -37,11 +38,11 @@
         <div class="billing-info">
             <div>
                 <h4>Invoiced To</h4>
-                <p>{{order.full_name}}</p>
-                <p>{{ order.full_address}}</p>
-                <p>{{order.city}}</p>
-                <p>{{order.country}}</p>
-                <p>Email: {{order.email}}</p>
+                <p class="mb-0">{{order.full_name}}</p>
+                <p class="mb-0">{{ order.full_address}}</p>
+                <p class="mb-0">{{order.city}}</p>
+                <p class="mb-0">{{order.country}}</p>
+                <p class="mb-0">Email: {{order.email}}</p>
             </div>
         </div>
 
@@ -52,6 +53,8 @@
                     <th>Products</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Total</th>
+                    
                    
                 </tr>
             </thead>
@@ -67,6 +70,7 @@
                     </td>
                     <td>{{item.quantity}}</td>
                     <td>£ {{ item.product.price}}</td>
+                    <td>£ {{ item.subtotal }}</td>
                     
                 </tr>
                 {% endfor %}
@@ -76,7 +80,8 @@
 
         <!-- Total -->
         <div class="invoice-total">
-            <p><strong>Grand Total:</strong> £{{order.total}}</p>
+            <p style="margin-right: 100px;"><strong >Tax :</strong> £{{ order.tax}}</p>
+            <p style="margin-right: 100px;"><strong >Grand Total:</strong> £{{ subtotal}}</p>
         </div>
 
     </div>
