@@ -1,9 +1,11 @@
 from django.urls import path
-from store import views
+from . import views
 
 urlpatterns = [
 
     path('', views.store, name='store'),
+    path('submit_review/<int:product_id>/', views.submit_review, name="submit_review"),
+
     path('search/', views.search, name="search"),
 
     path('<slug:category_slug>/', views.store, name='products_by_category'),
