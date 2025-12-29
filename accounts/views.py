@@ -17,6 +17,9 @@ from carts.models import Cart, CartItem
 from carts.views import _cart_id
 import requests
 
+from orders.models import Order
+from django.db.models import Count
+
 # Create your views here.
 
 
@@ -153,9 +156,14 @@ def activate(request,uidb64,token):
         messages.error(request,'Invalid Activation link')
         return redirect('register')
     
-@login_required
+@login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered= True)
+    order_count =orders.count()
+    context = {
+        'order_count':order_count,
+    }
+    return render(request, 'accounts/dashboard.html',context)
 
 
 def forgot_password(request):
@@ -194,6 +202,14 @@ def forgot_password(request):
 
 def resetpassword_validate(request):
     return HttpResponse('')
+
+
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered= True).order_by('-created_at')
+    context = {
+        'orders':orders,
+    }
+    return render(request, 'accounts/my_orders.html',context)
 
 
 

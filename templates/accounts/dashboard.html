@@ -3,52 +3,43 @@
 {% block content %}
 
 <section class="container my-5">
-    <h4 class="mb-4">Welcome {{ user.first_name }} {{ user.last_name }}</h4>
+    <h4 class="mb-4">Welcome {{user.full_name}}</h4>
 
     <div class="row">
         <!-- LEFT SIDEBAR -->
-        <div class="col-md-3">
-            <div class="card dashboard-nav">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item active">My order history</li>
-                    <li class="list-group-item">Transactions</li>
-                    <li class="list-group-item">Return & refunds</li>
-                    <li class="list-group-item">Settings</li>
-                    <li class="list-group-item">My Selling Items</li>
-                    <li class="list-group-item">Received orders</li>
-                </ul>
-                <div class="p-3">
-                    <a href="{% url 'logout' %}" class="btn w-100" style="background-color: #76573b; color: white   ;">
-                        Log out
-                    </a>
-                </div>
-            </div>
-        </div>
+        {% include 'accounts/dashboard_sidebar.html' %}
 
         <!-- RIGHT CONTENT -->
         <div class="col-md-9">
-            <div class="card dashboard-details p-4">
-                <h6 class="mb-3">Order ID: 6123456789</h6>
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <p><strong>Delivery to:</strong><br>
-                            Michael Jackson<br>
-                            Phone: +1234567890<br>
-                            Email: myname@pixsellz.com
-                        </p>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <strong>Logged in as:</strong> <span>{{user.full_name}}</span>
                     </div>
-                    <div class="col-md-4 text-end">
-                        <p><strong>Payment</strong><br>
-                            Visa **** 4216<br>
-                            Total: $456
-                        </p>
+                    <hr>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card card-1 p-2">
+                                    <div class="card-title">Total orders</div>
+                                    <strong>{{order_count}}</strong>
+                                    <a href="{% url 'my_orders' %}">View orders</a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card card-2 p-2">
+                                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Profile picture" style="border-radius: 50%;" height="50" width="50">
+                                    <p class="m-0">Email: {{user.email}}</p>
+                                    <p class="m-0">Phone number:{{user.phone_number}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                       
                     </div>
                 </div>
-
-                <hr>
-
-                <p>Product list will go here (table or cards)</p>
+                
+                
             </div>
         </div>
     </div>
