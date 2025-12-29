@@ -12,27 +12,27 @@
 
         <div class=" details_side">
             <h3>{{ single_product.product_name}}</h3>
+            <div class="rating-star mb-2">
+                <i class="{% if single_product.averageReview >= 1 %}fa-solid fa-star{% elif single_product.averageReview >= 0.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+        
+                <i class="{% if single_product.averageReview >= 2 %}fa-solid fa-star{% elif single_product.averageReview >= 1.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+        
+                <i class="{% if single_product.averageReview >= 3 %}fa-solid fa-star{% elif single_product.averageReview >= 2.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+        
+                <i class="{% if single_product.averageReview >= 4 %}fa-solid fa-star{% elif single_product.averageReview >= 3.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+        
+                <i class="{% if single_product.averageReview >= 5 %}fa-solid fa-star{% elif single_product.averageReview >= 4.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+        
+                <span>
+                    
+                    ({{ single_product.countReview }} reviews)
+                </span>
+                </div>
             <h4>£ {{single_product.price}} </h4>
 
 
 
-            <!-- responsive star rating -->
-
-            <!-- <div class="star-rating animated-stars">
-                <input type="radio" id="star5" name="rating" value="5">
-                <label for="star5" class="bi bi-star-fill"></label>
-                <input type="radio" id="star4" name="rating" checked="" value="4">
-                <label for="star4" class="bi bi-star-fill"></label>
-                <input type="radio" id="star3" name="rating" value="3">
-                <label for="star3" class="bi bi-star-fill"></label>
-                <input type="radio" id="star2" name="rating" value="2">
-                <label for="star2" class="bi bi-star-fill"></label>
-                <input type="radio" id="star1" name="rating" value="1">
-                <label for="star1" class="bi bi-star-fill"></label>
-            </div>( 3 reviews) -->
-
-
-            <!-- end of responsive star rating -->
+            
             <p>{{ single_product.product_description }}</p>
 
             <form action="{% url 'add_cart' single_product.id %}" method="POST" class="form-group">
@@ -69,6 +69,9 @@
 
 </div>
 
+
+<!-- review writing section -->
+
 <div class="container">
 
     <h5>Write your review</h5>
@@ -92,16 +95,81 @@
         <br>
 
     
-        <label>Enter review title</label><input type="text" style="width: 80%;" name="subject" class="form-control">
-        <label>Enter your review </label><textarea rows="3" style="width: 80%;" name="review" class="form-control"></textarea>
+        <label style="color: black;">Enter review title</label><input type="text" style="width: 80%;" name="subject" class="form-control">
+        <label style="color: black;">Enter your review </label><textarea rows="3" style="width: 80%;" name="review" class="form-control"></textarea>
        
         {% if user.is_authenticated %}
-            <button class="btn review-btn" type="submit">Submit Review</button>
+            {% if orderproduct %}
+                <button class="btn review-btn" type="submit">Submit Review</button>
+            {% else %}
+            <p>You must purchase the item  to post a review.</p>
+
+
+            {% endif %}
         {% else %}
              <p>You must be logged in to post a review.<a href="{% url 'login' %}">Login</a></p>
         {% endif %}
         {% include 'alerts.html' %}
     </form>
+<hr>
+
+
+<!-- customer review section -->
+    <div>
+        <h4>Customer Reviews</h4>
+        {% if reviews %}
+    
+        
+
+        <div class="rating-star mb-2">
+        <i class="{% if single_product.averageReview >= 1 %}fa-solid fa-star{% elif single_product.averageReview >= 0.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+
+        <i class="{% if single_product.averageReview >= 2 %}fa-solid fa-star{% elif single_product.averageReview >= 1.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+
+        <i class="{% if single_product.averageReview >= 3 %}fa-solid fa-star{% elif single_product.averageReview >= 2.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+
+        <i class="{% if single_product.averageReview >= 4 %}fa-solid fa-star{% elif single_product.averageReview >= 3.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+
+        <i class="{% if single_product.averageReview >= 5 %}fa-solid fa-star{% elif single_product.averageReview >= 4.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+
+        <span>
+            {{ single_product.averageReview|floatformat:1 }} / 5
+            ({{ single_product.countReview }} reviews)
+        </span>
+        </div>
+
+        <div class="card review-card">
+        <div class="card-body">
+            {% for review in reviews %}
+            <div class="row header-row">
+                <div class="col-9">
+                <h5 class="mb-0">{{ review.user.full_name }}</h5>
+                </div>
+                <div class="col-3 text-end">
+                <small>{{ review.updated_at }}</small>
+                </div>
+            </div>
+
+            <div class="rating-star mb-1">
+                <i class="{% if review.rating >= 1 %}fa-solid fa-star{% elif review.rating >= 0.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                <i class="{% if review.rating >= 2 %}fa-solid fa-star{% elif review.rating >= 1.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                <i class="{% if review.rating >= 3 %}fa-solid fa-star{% elif review.rating >= 2.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                <i class="{% if review.rating >= 4 %}fa-solid fa-star{% elif review.rating >= 3.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                <i class="{% if review.rating >= 5 %}fa-solid fa-star{% elif review.rating >= 4.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+            </div>
+
+            <strong>{{ review.subject }}</strong>
+            <p class="mb-0">{{ review.review }}</p>
+            <hr>
+            {% endfor %}
+        </div>
+        </div>
+
+        </div>
+        {% else %}
+        <p>No reviews available!</p>
+        {% endif %}
+    </div>
 
 </div>
 

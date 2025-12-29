@@ -49,3 +49,40 @@
     color: #fff;
     margin-top: 10px;
 }
+
+
+
+/* Customer review */
+.review-card{
+    width: 80%;
+}
+
+.review-card .card-body{
+    background-color: #fff;
+}
+
+.review-card .card-body .header-row{
+    background-color: #fff;
+    border: none;
+    margin-bottom: 0px;
+    padding-bottom:0px ;
+}
+
+
+/* star rating */
+.rating-star i{
+    font-size: 16px;
+    margin-right: 2px;
+  }
+  
+  /* filled + half */
+.rating-star .fa-solid{
+    color: #ffc107;
+  }
+  
+  /* empty */
+.rating-star .fa-regular{
+     color: #e0e0e0;
+  }
+  
+  
