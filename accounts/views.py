@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from accounts.forms import RegistrationForm
-from accounts.models import Account
+from .forms import RegistrationForm,UserForm,UserProfileForm
+from .models import Account, UserProfile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
@@ -211,6 +211,36 @@ def my_orders(request):
     }
     return render(request, 'accounts/my_orders.html',context)
 
+
+def edit_profile(request):
+    userprofile, created = UserProfile.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        print('post method')
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request,'Your profile has been updated!')
+            return redirect('edit_profile')
+        
+
+        
+    else:
+        print('not post method')
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+    context = {
+        'user_form':user_form,
+        'profile_form':profile_form,
+        'userprofile':userprofile,
+
+    }
+    
+
+     
+    return render(request,'accounts/edit_profile.html',context)
 
 
     
