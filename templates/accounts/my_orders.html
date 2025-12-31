@@ -30,7 +30,11 @@
                             <tbody>
                                 {% for order in orders %}
                               <tr>
-                                <th scope="row">{{order.id}}</th>
+                                <th scope="row">
+                                  <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a>
+
+
+                                </th>
                                 <td>{{order.full_name}}
                                     <br>
                                     {{ order.full_address }}

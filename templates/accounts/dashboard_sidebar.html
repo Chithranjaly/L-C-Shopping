@@ -4,7 +4,7 @@
             <a href="{% url 'dashboard' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/dashboard/' == request.path %} active {% endif %}">Dashboard</li></a>
             <a href="{% url 'my_orders' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/my_orders/' in request.path %} active {% endif %}">My orders</li></a>
             <a href="{% url 'edit_profile' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/edit_profile/' in request.path %} active {% endif %}">Edit Profile</li></a>
-            <li class="list-group-item ">Change Password</li>
+            <a href="{% url 'change_password' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/change_password/' in request.path %} active {% endif %}">Change Password</li></a>
         </ul>
         <div class="p-3">
             <a href="{% url 'logout' %}" class="btn w-100" style="background-color: #76573b; color: white   ;">

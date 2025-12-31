@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="success-container">
+
+   
+    
+    <!-- Invoice Card -->
+    <div class="invoice-card">
+
+        <!-- Invoice Header -->
+        <div class="invoice-header">
+            <div>
+                <h3>Invoice</h3>
+                <p><strong>Order #:</strong> {{ order.order_number}}</p>
+                <p><strong>Transaction ID:</strong> {{ order.payment.payment_id }}</p>
+            </div>
+
+            <div class="invoice-date">
+                <p><strong>Date:</strong> {{ order.created_at }}</p>
+                <p><strong>Payment Status :</strong> {{ order.payment.status }}</p>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Billing Info -->
+        <div class="billing-info">
+            <div>
+                <h4>Purchased details</h4>
+                <p class="mb-0">{{order.full_name}}</p>
+                <p class="mb-0">{{ order.full_address}}</p>
+                <p class="mb-0">{{order.city}}</p>
+                <p class="mb-0">{{order.country}}</p>
+                <p class="mb-0">Email: {{order.email}}</p>
+            </div>
+        </div>
+
+        <!-- Items Table -->
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Products</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order_detail %}
+                <tr>
+                    <td>{{item.product.product_name}}
+                        <p>{% if item.variations.all %}
+                            {% for i in item.variations.all %}
+                                {{ i.variation_name | capfirst }} : {{  i.variation_value | capfirst}}<br>
+                            {% endfor %}
+                        {% endif %}</p>
+                    </td>
+                    <td>{{item.quantity}}</td>
+                    <td>£ {{ item.product.price}}</td>
+                    <td>£ {{ subtotal }}</td>
+                    
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+        <!-- Total -->
+        <div class="invoice-total">
+            <p style="margin-right: 100px;"><strong >Tax :</strong> £{{ order.tax}}</p>
+            <p style="margin-right: 100px;"><strong >Grand Total:</strong> £{{ subtotal}}</p>
+        </div>
+
+    </div>
+    <a href="{% url 'my_orders' %}"><button class="btn" style="background-color: rgb(152, 108, 108); color: aliceblue; margin-top: 20px;">Go back</button></a>
+
+</div>
+
+
+
+
+
+{% endblock %}
