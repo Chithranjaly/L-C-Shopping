@@ -4,10 +4,21 @@
 
 <div class="container mt-5">
     <div class="product_container">
-        <div class=" image_side p-2">
-            <img src="{{ single_product.image.url }}">
-
+        <div class="image_side p-2">
+            <img  id="mainImage" src="{{ single_product.image.url }}">
+            <ul class="thumb">
+                {% for i in product_gallery %}
+                <li>
+                    <a href="{{ i.image.url }}">
+                        <img src="{{ i.image.url }}" alt="Product image">
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            
         </div>
+
+        
 
 
         <div class=" details_side">

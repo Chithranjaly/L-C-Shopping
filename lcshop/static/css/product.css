@@ -51,6 +51,28 @@
 }
 
 
+ul.thumb {
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+ul.thumb li {
+    list-style: none;
+}
+
+ul.thumb li img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #4f4949;
+    cursor: pointer;
+}
+
+
+
 
 /* Customer review */
 .review-card{

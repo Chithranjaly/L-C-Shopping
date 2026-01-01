@@ -32,6 +32,22 @@
                     <a href="{{ product.get_url }}">
                         <h5 class="card-title">{{ product.product_name }}</h5>
                     </a>
+                    <div class="rating-star mb-2">
+                        <i class="{% if product.averageReview >= 1 %}fa-solid fa-star{% elif product.averageReview >= 0.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                
+                        <i class="{% if product.averageReview >= 2 %}fa-solid fa-star{% elif product.averageReview >= 1.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                
+                        <i class="{% if product.averageReview >= 3 %}fa-solid fa-star{% elif product.averageReview >= 2.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                
+                        <i class="{% if product.averageReview >= 4 %}fa-solid fa-star{% elif product.averageReview >= 3.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                
+                        <i class="{% if product.averageReview >= 5 %}fa-solid fa-star{% elif product.averageReview >= 4.5 %}fa-solid fa-star-half-stroke{% else %}fa-regular fa-star{% endif %}"></i>
+                
+                        <span>
+                            
+                            ({{ product.countReview }} reviews)
+                        </span>
+                    </div>
                     <h6>£{{ product.price}}</h6>
                     <p class="card-text">{{ product.product_description | truncatechars:50 }}</p>
                     <a href="{{ product.get_url }}" class="btn text-light text-decoration-none"
