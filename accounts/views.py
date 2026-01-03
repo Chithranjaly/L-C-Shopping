@@ -12,6 +12,9 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from django.conf import settings
+from django.shortcuts import redirect
+from django.contrib import messages
 
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
@@ -186,7 +189,7 @@ def forgot_password(request):
             mail_subject = 'Reset your password'
             message = render_to_string('accounts/reset_password.html',{
                 'user':user,
-                'domain':current_site,
+                'domain':current_site.domain,
                 'protocol': 'http',
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token':default_token_generator.make_token(user),
@@ -196,7 +199,7 @@ def forgot_password(request):
             send_email = EmailMessage(
                 mail_subject,
                 message,
-                from_email='L&C Shop <chithra7123@gmail.com>',
+                from_email=f"L&C Shop <{settings.DEFAULT_FROM_EMAIL}>",
                 to=[to_email],
                 )
 
@@ -209,8 +212,44 @@ def forgot_password(request):
             return redirect('forgot_password')            
     return render(request, 'accounts/forgot_password.html')
 
-def resetpassword_validate(request):
-    return HttpResponse('')
+
+
+def resetpassword_validate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = Account._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        request.session['reset_uid'] = uid
+        messages.success(request, 'Please reset your password.')
+        return redirect('resetting_password')  # you must create this url + template
+
+    messages.error(request, 'This link has expired or is invalid.')
+    return redirect('forgot_password')
+
+def resetting_password(request):
+    if request.method == 'POST':
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+        uid = request.session['reset_uid']
+        if new_password == confirm_password:
+            try:
+                user = Account.objects.get(id=uid)
+                user.set_password(new_password)
+                user.save()
+                messages.success(request,'Password changed successfully. Please login!')
+                del request.session['reset_uid']
+                return redirect('login')
+
+            except Account.DoesNotExist:
+                messages.error(request,'Account not found! Try again.')
+                return redirect('forgot_password')
+        else:
+            messages.error(request,'Passwords not matching!')
+    return render(request,'accounts/resetting_password.html')
+
 
 
 
@@ -275,7 +314,6 @@ def change_password(request):
         else:
             messages.error(request,'Passwords must match')
             return redirect('change_password')
-
 
     return render(request,'accounts/change_password.html')
 

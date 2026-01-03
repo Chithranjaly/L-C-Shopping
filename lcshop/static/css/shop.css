@@ -19,8 +19,8 @@ header {
     width: 100%;
 }
 
-.header-row {
-    border: 3px solid #390f0fb7;
+.header-row {    
+    border: 1px solid rgba(57, 15, 15, 0.35); 
     background-color: #390f0fe0;
     padding: 10px 15px;
     display: flex;
@@ -150,25 +150,30 @@ p, span, label {
 /* ===========================
    BANNER & HOME PAGE
    =========================== */
+/* Replace the margin-top approach */
 .banner-jumbotron {
     height: 50vh;
     background-image: url("../images/banner1.png");
     background-size: cover;
     background-position: center;
+    padding-top: 30px;          /* ✅ creates space without looking like a gap */
 }
 
+/* remove the margin that creates the “gap” look */
 .banner-c {
-    margin-top: 30px;
+    margin-top: 0;              /* ✅ */
     background-color: rgba(255, 255, 255, 0.7);
     max-width: 80%;
     text-align: center;
     padding: 15px;
 }
 
+/* optional: kill default heading top margin that can add extra spacing */
 .banner-c h1 {
-    color: #543333;
-    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
 }
+   
 
 .banner-c p {
     color: #543333;
