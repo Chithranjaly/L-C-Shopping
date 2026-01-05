@@ -2,7 +2,6 @@ asgiref==3.11.0
 certifi==2026.1.4
 charset-normalizer==3.4.4
 Django==6.0
-django-admin-honeypot @ git+https://github.com/dmpayton/django-admin-honeypot@a840496d183df89965eeb33c9a5dd9ea3919dfff
 django-admin-thumbnails==1.0.0
 django-ipware==7.0.1
 django-session-timeout==0.1.0
@@ -16,3 +15,5 @@ six==1.17.0
 sqlparse==0.5.5
 tzdata==2025.3
 urllib3==2.6.2
+django-admin-honeypot-2024
+
