@@ -34,6 +34,7 @@ ALLOWED_HOSTS = config(
 ).split(",")
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
