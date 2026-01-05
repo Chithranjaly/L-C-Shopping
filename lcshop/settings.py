@@ -32,20 +32,24 @@ DEBUG = config('DEBUG',cast=bool, default = False)
 
 
 
-
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,.elasticbeanstalk.com,.amazonaws.com,.compute.internal"
 ).split(",")
 
-# Add EC2 hostnames used by ELB health checks
-fqdn = socket.gethostname()              # e.g. ip-172-31-33-110.us-west-2.compute.internal
-short = fqdn.split(".")[0]               # e.g. ip-172-31-33-110
+fqdn = socket.gethostname()
+short = fqdn.split(".")[0]
 
-ALLOWED_HOSTS.extend([fqdn, short])
+for h in (fqdn, short):
+    if h not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(h)
 
-
-
+try:
+    private_ip = socket.gethostbyname(socket.gethostname())
+    if private_ip not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(private_ip)
+except Exception:
+    pass
 
 
 # Application definition
