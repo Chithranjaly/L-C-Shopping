@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import socket
-
 from decouple import config
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,14 +31,18 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG',cast=bool, default = False)
 
 
+
+
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,.elasticbeanstalk.com,.amazonaws.com,.compute.internal"
 ).split(",")
 
-# Add the instance hostname like "ip-172-31-33-110" (ELB may use it)
-ALLOWED_HOSTS.append(socket.gethostname())
+# Add EC2 hostnames used by ELB health checks
+fqdn = socket.gethostname()              # e.g. ip-172-31-33-110.us-west-2.compute.internal
+short = fqdn.split(".")[0]               # e.g. ip-172-31-33-110
 
+ALLOWED_HOSTS.extend([fqdn, short])
 
 
 
