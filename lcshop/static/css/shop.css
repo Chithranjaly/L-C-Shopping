@@ -1,19 +1,27 @@
 /* ===========================
    BASE LAYOUT (base.html)
    =========================== */
-body {
-    margin: 0;
+
+body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #fffdd0;
     font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 a {
     text-decoration: none; /* remove underlines globally */
     color: inherit; /* inherit color */
 }
+a:hover {
+    text-decoration: none;
+  }
 
 header {
     width: 100%;
