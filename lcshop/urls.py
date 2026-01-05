@@ -19,8 +19,15 @@ from django.urls import include, path
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.http import HttpResponse
+
+
+
+def health(_request):
+    return HttpResponse("ok", content_type="text/plain")
 
 urlpatterns = [
+    path("health/", health),
     path('admin/', include('admin_honeypot.urls',namespace='admin_honeypot')),
     path('securelogin/', admin.site.urls),
     path('', views.home, name="home"),
