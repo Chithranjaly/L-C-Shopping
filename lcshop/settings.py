@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from django.contrib.messages import constants as messages
 from pathlib import Path
+import socket
+
 from decouple import config
 
 
@@ -28,10 +30,15 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',cast=bool, default = False)
 
+
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,.elasticbeanstalk.com,.amazonaws.com,.compute.internal"
 ).split(",")
+
+# Add the instance hostname like "ip-172-31-33-110" (ELB may use it)
+ALLOWED_HOSTS.append(socket.gethostname())
+
 
 
 
