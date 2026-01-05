@@ -1,179 +1,458 @@
-body {
-    margin: 0;
+/* ===========================
+   BASE LAYOUT (base.html)
+   =========================== */
+
+body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #fffdd0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-.header-row {
-    border: 3px solid #390f0fb7;
+a {
+    text-decoration: none; /* remove underlines globally */
+    color: inherit; /* inherit color */
+}
+a:hover {
+    text-decoration: none;
+  }
+
+header {
+    width: 100%;
+}
+
+.header-row {    
+    border: 1px solid rgba(57, 15, 15, 0.35); 
     background-color: #390f0fe0;
-    padding: 10px 0px;
+    padding: 10px 15px;
     display: flex;
-    /* width: 100vw; */
-
     justify-content: space-between;
-    height: auto;
-}
-
-.right-section {
-    display: flex;
     align-items: center;
-    gap: 1rem;
-    /* space between dropdown, search, and buttons */
+    flex-wrap: wrap;
 }
 
 .header-logo {
-    margin-top: 9px;
     color: #f4f0a3;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
     font-size: 2rem;
 }
 
-.form-control {
-    width: 200px;
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* added proper spacing between center elements */
+    flex-wrap: wrap;
 }
 
+.right-section,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
+.cart-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
 
+/* remove button underlines */
+button a {
+    color: inherit;
+}
 
+button a:hover {
+    text-decoration: none;
+}
 
+main.main-content {
+    flex: 1;
+}
 
+/* ===========================
+   FOOTER
+   =========================== */
 footer {
     background-color: #390f0fe3;
     color: bisque;
     padding: 15px 0;
     text-align: center;
-    margin: 0;
-    font-family: 'Times New Roman', Times, serif;
+    margin-top: auto; /* push footer to bottom if short content */
 }
 
-main.container {
-    flex: 1;
+footer a {
+    color: bisque;
 }
 
-.main-content {
-    width: 100%;
+/* ===========================
+   GLOBAL FONT SIZE
+   =========================== */
+body {
+    font-size: 1.1em; /* normal text size */
+    line-height: 1.6; /* makes text more readable */
 }
 
-@media (max-width: 576px) {
-    .header-row {
-        height: auto;
-        text-align: center;
-    }
-
-    .header-logo {
-        font-size: 1.5rem;
-    }
-}
-
-button {
-    background-color: #EDE8D0;
-
-}
-
-button a {
-    color: #543333;
-}
-
-button a:hover {
-    color: brown;
-    text-decoration: none;
-}
-
-.text1 {
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(82, 57, 57);
-    top: 2px;
-}
-
-.banner-c {
-    margin-top: 30px;
-    background-color: rgba(255, 255, 255, 0.7);
-    max-width: 80%;
-}
-
-.banner-c h1 {
-    color: #543333;
+/* Headings */
+h1 {
     font-size: 2.5rem;
 }
 
-.banner-c p {
-    color: #543333;
-    text-align: center;
+h2 {
+    font-size: 2rem;
 }
 
-.items {
-    display: grid;
+h3 {
+    font-size: 1.75rem;
 }
 
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+/* Buttons */
+button,
+.reg_log_button,
+.checkout-btn,
+.order-btn,
+.continue-btn,
+.all-products,
+.btn {
+    font-size: 1.2em;
+    padding: 10px 16px; /* slightly bigger clickable area */
+}
+
+/* Forms */
+input.form-control,
+textarea.form-control,
+select.form-control {
+    font-size: 1rem; /* readable input fields */
+}
+
+/* Smaller text elements */
+p, span, label {
+    font-size: 1rem; 
+}
+
+
+/* ===========================
+   BANNER & HOME PAGE
+   =========================== */
+/* Replace the margin-top approach */
 .banner-jumbotron {
     height: 50vh;
     background-image: url("../images/banner1.png");
     background-size: cover;
     background-position: center;
+    padding-top: 30px;          /* ✅ creates space without looking like a gap */
 }
 
-.dropdown-menu {
-    background-color: rgb(213, 176, 156);
-
+/* remove the margin that creates the “gap” look */
+.banner-c {
+    margin-top: 0;              /* ✅ */
+    background-color: rgba(255, 255, 255, 0.7);
+    max-width: 80%;
+    text-align: center;
+    padding: 15px;
 }
 
-.dropdown-menu .dropdown-item:hover {
-    background-color: #fff !important;
+/* optional: kill default heading top margin that can add extra spacing */
+.banner-c h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+   
+
+.banner-c p {
     color: #543333;
 }
 
-.dropdown-menu .dropdown-item {
-    background-color: rgb(213, 176, 156);
-    color: #543333;
+/* Home products grid */
+.home-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
+.all-products {
+    background-color: #5e4d3f;
+    color: #ece8e8;
+}
+
+/* ===========================
+   PRODUCT PAGES (store.html & product.html)
+   =========================== */
 .product_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
     background-color: #fff;
-    border: 3px rgb(205, 180, 180) solid;
-    height: 80vh;
-    margin-bottom: 3%;
-
+    border: 3px solid rgb(205, 180, 180);
 }
 
 .image_side {
-    border: 2px gray thick;
-    height: 500px;
-    width: 400px;
-    margin: 20px 0px 0px 80px;
-    /*top right down left  */
+    flex: 0 0 350px;
+    max-width: 350px;
+    border: 2px solid #EDE8D0;
+    padding: 10px;
+    background-color: #fff;
 }
 
 .details_side {
-    border: 2px gray thick;
-    height: 500px;
-    width: 400px;
-    margin: 20px 0px 0px 0px;
-    padding: 10px 0px 0px 20px;
-
-}
-
-/* dashboard.html */
-.dashboard-nav,
-.dashboard-details{
-    background-color: rgb(111, 38, 1);
-    border-radius: 10px; 
-
-}
-
-.nav-list{
-    list-style: none;      /* remove bullets */
-    padding: 0;            /* remove left indent */
-    margin: 0;
-}
-
-.nav-list li{
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    border: 2px solid #EDE8D0;
+    padding: 20px;
     background-color: #fff;
-    padding: 10px 15px;    /* give it physical size */
-    margin-bottom: 10px;  /* spacing between items */
+    word-wrap: break-word;
+}
+
+.image_side img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+}
+
+/* store page cards */
+.card {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* ===========================
+   CART PAGE & CHECKOUT
+   =========================== */
+.checkout-wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.cart-item {
+    background: #f8f5e6;
+    border: 1px solid #d6c89d;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+}
+
+.cart-item-img img {
+    height: 95px;
+    width: 95px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #d6c89d;
+}
+
+.cart-item-info h5 {
+    margin: 0;
+    color: #3c3025;
+}
+
+.cart-item-info p {
+    margin: 2px 0;
+    color: #5e4d3f;
+}
+
+.cart-item-qty,
+.cart-item-price {
+    text-align: center;
+}
+
+.qty-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #c9bb95;
     border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    margin: 2px 10px;
+}
+
+.qty-btn {
+    background: #e3dcc4;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.qty-btn:hover {
+    background: #d8d0b6;
+}
+
+.qty-value {
+    padding: 5px 12px;
+    font-weight: bold;
+}
+
+.remove-btn {
+    border: none;
+    background: #c54444;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background: #a93636;
+}
+
+/* checkout summary box */
+.checkout-summary {
+    background: #faf8f2;
+    padding: 20px;
+    border: 1px solid #d6c89d;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* empty cart */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+}
+
+/* buttons */
+.checkout-btn,
+.order-btn,
+.continue-btn {
+    width: 100%;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkout-btn {
+    background: #3a2f24;
+    color: #f2e7c6;
+}
+
+.checkout-btn:hover,
+.order-btn:hover,
+.continue-btn:hover {
+    opacity: 0.9;
+}
+
+/* ===========================
+   REGISTER & LOGIN PAGES
+   =========================== */
+.card.form-card,
+.card.login-card {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fffdd0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card.form-card h2,
+.card.login-card h2 {
+    text-align: center;
+}
+
+.reg_log_button {
+    width: 100%;
+    background-color: #b08565;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.reg_log_button:hover {
+    opacity: 0.9;
+}
+
+input.form-control {
+    width: 100%;
+}
+
+/* ===========================
+   DASHBOARD PAGE
+   =========================== */
+/* .dashboard-nav,
+.dashboard-details {
+    background-color: rgb(168, 116, 90);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+} */
+/* 
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-list li {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+} */
+
+/* ===========================
+   MEDIA QUERIES
+   =========================== */
+@media (max-width: 576px) {
+    .header-row {
+        flex-direction: column;
+        text-align: center;
+    }
+    .header-logo {
+        font-size: 1.5rem;
+    }
+    .nav-center {
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 10px 0;
+    }
+    .home-heading {
+        flex-direction: column;
+        align-items: start;
+    }
+    .product_container {
+        flex-direction: column;
+    }
 }

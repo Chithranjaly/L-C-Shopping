@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',cast=bool, default = False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-lcshop-env.eba-xk5rh2h5.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
