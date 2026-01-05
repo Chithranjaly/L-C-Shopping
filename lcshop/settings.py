@@ -35,6 +35,7 @@ ALLOWED_HOSTS = config(
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
