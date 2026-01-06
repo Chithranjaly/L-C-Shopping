@@ -6,4 +6,4 @@ django-admin-thumbnails==1.0.0
 django-ipware==7.0.1
 python-ipware==3.0.0
 django-session-timeout==0.1.0
-django-admin-honeypot @ git+https://github.com/dmpayton/django-admin-honeypot@a840496d183df89965eeb33c9a5dd9ea3919dfff
+django-admin-honeypot==1.1.0
