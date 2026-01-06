@@ -1,15 +1,35 @@
-<div class="col-md-3">
-    <div class="card dashboard-nav">
-        <ul class="list-group list-group-flush">
-            <a href="{% url 'dashboard' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/dashboard/' == request.path %} active {% endif %}">Dashboard</li></a>
-            <a href="{% url 'my_orders' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/my_orders/' in request.path %} active {% endif %}">My orders</li></a>
-            <a href="{% url 'edit_profile' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/edit_profile/' in request.path %} active {% endif %}">Edit Profile</li></a>
-            <a href="{% url 'change_password' %}" style="text-decoration: none; color:black"><li class="list-group-item {% if '/accounts/change_password/' in request.path %} active {% endif %}">Change Password</li></a>
-        </ul>
-        <div class="p-3">
-            <a href="{% url 'logout' %}" class="btn w-100" style="background-color: #76573b; color: white   ;">
-                Log out
-            </a>
-        </div>
+<div class="card dashboard-nav">
+    <ul class="list-group list-group-flush">
+  
+      <li class="list-group-item {% if request.path == '/accounts/dashboard/' %}active{% endif %}">
+        <a href="{% url 'dashboard' %}" class="d-block text-dark text-decoration-none">
+          Dashboard
+        </a>
+      </li>
+  
+      <li class="list-group-item {% if '/accounts/my_orders/' in request.path %}active{% endif %}">
+        <a href="{% url 'my_orders' %}" class="d-block text-dark text-decoration-none">
+          My orders
+        </a>
+      </li>
+  
+      <li class="list-group-item {% if '/accounts/edit_profile/' in request.path %}active{% endif %}">
+        <a href="{% url 'edit_profile' %}" class="d-block text-dark text-decoration-none">
+          Edit Profile
+        </a>
+      </li>
+  
+      <li class="list-group-item {% if '/accounts/change_password/' in request.path %}active{% endif %}">
+        <a href="{% url 'change_password' %}" class="d-block text-dark text-decoration-none">
+          Change Password
+        </a>
+      </li>
+  
+    </ul>
+  
+    <div class="p-3">
+        <a href="{% url 'logout' %}" class="btn w-100 logout-btn">Log out</a>
+
     </div>
-</div>
+  </div>
+  

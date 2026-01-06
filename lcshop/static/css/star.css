@@ -1,42 +1,76 @@
-/* Hide Radio button */
-.rate > input{
+/* =======================
+   STAR RATING (0.5 steps) — FINAL, NO FRAGMENTS
+   ======================= */
+
+.rate{
+  position: relative;
+  display: inline-block;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* hide radios */
+.rate input{
   display: none;
 }
 
-.rate{
-  display: inline-block;;
-  border: 0;
-}
-
-.rate > label{
-  float: right;
-}
-
-/* Showing the stars */
-.rate > label:before{
+/* draw stars once */
+.rate .stars{
   display: inline-block;
-  font-size: 1rem;
-  font-family: FontAwesome;
-  content: "\f005";
-  margin:0;
-  padding:0.3rem .2rem;
-  cursor: pointer;
+  position: relative;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
 }
 
-/* Half star */
-.rate .half:before{
-  content: "\f089";
-  position: absolute;
-  padding-right: 0;
+/* 5 empty stars */
+.rate .stars::before{
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #d9d9d9;
+  white-space: nowrap;
 }
 
-/* Click and hover */
-input:checked ~ label, label:hover ~ label{
+/* 5 filled stars (clipped by width) */
+.rate .stars::after{
+  content: "\f005 \f005 \f005 \f005 \f005";
   color: #ffb503;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-/* hover hightlight */
-input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label{
-  color: #cc9000;
+/* Invisible click zones: 10 steps (each = 10% of the width) */
+.rate label{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 10%;
+  cursor: pointer;
+  z-index: 2;
 }
+
+/* place each label across the stars */
+.rate label[for="rating1"]{ left: 0%; }
+.rate label[for="rating2"]{ left: 10%; }
+.rate label[for="rating3"]{ left: 20%; }
+.rate label[for="rating4"]{ left: 30%; }
+.rate label[for="rating5"]{ left: 40%; }
+.rate label[for="rating6"]{ left: 50%; }
+.rate label[for="rating7"]{ left: 60%; }
+.rate label[for="rating8"]{ left: 70%; }
+.rate label[for="rating9"]{ left: 80%; }
+.rate label[for="rating10"]{ left: 90%; }
+
+/* set fill width based on checked rating */
+#rating1:checked  ~ .stars::after{ width: 10%; }
+#rating2:checked  ~ .stars::after{ width: 20%; }
+#rating3:checked  ~ .stars::after{ width: 30%; }
+#rating4:checked  ~ .stars::after{ width: 40%; }
+#rating5:checked  ~ .stars::after{ width: 50%; }
+#rating6:checked  ~ .stars::after{ width: 60%; }
+#rating7:checked  ~ .stars::after{ width: 70%; }
+#rating8:checked  ~ .stars::after{ width: 80%; }
+#rating9:checked  ~ .stars::after{ width: 90%; }
+#rating10:checked ~ .stars::after{ width: 100%; }

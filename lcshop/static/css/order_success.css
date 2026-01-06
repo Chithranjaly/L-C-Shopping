@@ -1,74 +1,115 @@
-body {
-    background: #f4f6f8;
-    font-family: Arial, sans-serif;
-    color: #333;
-}
+/* =======================
+   ORDER SUCCESS PAGE ONLY
+   ======================= */
 
+/* Page wrapper */
 .success-container {
-    max-width: 800px;
-    margin: 50px auto;
-    text-align: center;
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 0 12px;
 }
 
-.success-icon {
-    width: 80px;
-    height: 80px;
-    background: #28a745;
-    color: #fff;
-    font-size: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
+/* Make the invoice area look like its own page without touching <body> */
+.success-container .invoice-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.subtitle {
-    color: #666;
-    margin-bottom: 30px;
+/* Success icon */
+.success-container .success-icon {
+  width: 80px;
+  height: 80px;
+  background: #28a745;
+  color: #fff;
+  font-size: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
 }
 
-.invoice-card {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
+.success-container .subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Invoice header */
+.success-container .invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.success-container .invoice-date {
+  text-align: right;
+}
+
+.success-container .billing-info {
+  margin: 20px 0;
+}
+
+/* Table */
+.success-container .invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.success-container .invoice-table th,
+.success-container .invoice-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.success-container .invoice-table th {
+  background: #f1f1f1;
+}
+
+.success-container .invoice-total {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* =======================
+   MOBILE
+   ======================= */
+@media (max-width: 576px) {
+  .success-container {
+    margin: 25px auto;
+  }
+
+  .success-container .invoice-card {
+    padding: 16px;
+  }
+
+  .success-container .invoice-header {
+    flex-direction: column;
+  }
+
+  .success-container .invoice-date {
     text-align: left;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
+  }
 
-.invoice-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
+  /* Tables are wide: allow horizontal scroll instead of breaking layout */
+  .success-container .invoice-card {
+    overflow-x: auto;
+  }
 
-.invoice-date {
-    text-align: right;
-}
+  .success-container .invoice-table th,
+  .success-container .invoice-table td {
+    padding: 10px;
+  }
 
-.billing-info {
-    margin: 20px 0;
-}
-
-.invoice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.invoice-table th,
-.invoice-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-.invoice-table th {
-    background: #f1f1f1;
-}
-
-.invoice-total {
-    text-align: right;
-    margin-top: 20px;
-    font-size: 18px;
+  .success-container .invoice-total {
+    font-size: 16px;
+  }
 }

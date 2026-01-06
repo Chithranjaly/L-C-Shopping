@@ -1,5 +1,10 @@
-.save-btn{
+.save-btn {
     background-color: rgb(140, 107, 74);
-    color:aliceblue;
-    size: 40%;
-}
+    color: aliceblue;
+    border: none;
+  }
+  
+  .save-btn:hover {
+    opacity: 0.9;
+  }
+  

@@ -1,110 +1,109 @@
 /* =======================
-   PRODUCT PAGE STYLES
+   STORE + PRODUCT DETAIL
    ======================= */
 
+/* Product detail layout */
 .product_container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
+/* Left image side */
 .image_side img {
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
+/* Right details side */
 .details_side {
-    flex: 1;
-    padding: 10px;
+  flex: 1;
+  min-width: 260px;
+  padding: 10px;
 }
 
-.star-rating {
-    direction: rtl;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.star-rating input {
-    display: none;
-}
-
-.star-rating label {
-    color: #ddd;
-    font-size: 20px;
-    padding: 0 2px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input:checked ~ label {
-    color: #ffc107;
-}
-
-.review-btn {
-    background-color: #6c3e3e;
-    color: #fff;
-    margin-top: 10px;
-}
-
-
+/* Thumbnail gallery */
 ul.thumb {
-    display: flex;
-    gap: 10px;
-    padding: 0;
-    margin-top: 10px;
-    margin-bottom: 0;
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 ul.thumb li {
-    list-style: none;
+  list-style: none;
 }
 
 ul.thumb li img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border: 1px solid #4f4949;
-    cursor: pointer;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #4f4949;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-
-
-
-/* Customer review */
-.review-card{
-    width: 80%;
+/* Review submit button */
+.review-btn {
+  background-color: #6c3e3e;
+  color: #fff;
+  margin-top: 10px;
+  border: none;
 }
 
-.review-card .card-body{
-    background-color: #fff;
+.review-btn:hover {
+  opacity: 0.9;
 }
 
-.review-card .card-body .header-row{
-    background-color: #fff;
-    border: none;
-    margin-bottom: 0px;
-    padding-bottom:0px ;
+/* Rating stars (used in home/store/product pages) */
+.rating-star i {
+  font-size: 16px;
+  margin-right: 2px;
 }
 
+/* filled + half */
+.rating-star .fa-solid {
+  color: #ffc107;
+}
 
-/* star rating */
-.rating-star i{
-    font-size: 16px;
-    margin-right: 2px;
+/* empty */
+.rating-star .fa-regular {
+  color: #e0e0e0;
+}
+
+/* Customer review card */
+.review-card {
+  width: 80%;
+}
+
+.review-card .card-body {
+  background-color: #fff;
+}
+
+/* Avoid touching site header (.header-row); scope to review rows only */
+.review-card .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .product_container {
+    flex-direction: column;
+  }
+
+  .image_side img {
+    max-width: 100%;
   }
   
-  /* filled + half */
-.rating-star .fa-solid{
-    color: #ffc107;
+  ul.thumb {
+    flex-wrap: wrap;
   }
-  
-  /* empty */
-.rating-star .fa-regular{
-     color: #e0e0e0;
+
+  .review-card {
+    width: 100%;
   }
-  
-  
+}

@@ -1,110 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 
 <div class="checkout-wrapper container">
+
+  <form action="{% url 'place_order' %}" method="POST">
+    {% csrf_token %}
+
     <div class="row g-4">
 
-        <!-- CART ITEMS -->
-        <div class="col-lg-6">
-            <div class="billing-details">
-                <h4 class="pt-4 px-3">Billing address</h4>
-                <form class="form-group billing-form" action="{% url 'place_order' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="name-section">
-                        <label>First Name *</label>
-                        <label>Last Name *</label>
-                    </div>
+      <!-- LEFT: BILLING DETAILS -->
+      <div class="col-lg-6">
+        <div class="billing-details">
+          <h4 class="pt-4 px-3">Billing address</h4>
 
-                    <div class="name-section">
-                        <input type="text" name="first_name" class="form-control">
-                        <input type="text" name="last_name" class="form-control">
-                    </div>
-                    <div class="name-section">
-                        <label>Email address *</label>
-                        <label>Phone number *</label>
-                    </div>
-                    <div class="name-section">
-                        <input type="email" name="email" class="form-control">
-                        <input type="text" name="phone" class="form-control">
-                    </div>
+          <div class="form-group billing-form">
 
-                    <label>Address line 1*</label>
-                    <input type="text" name="address_line1" class="form-control">
-                    <label>Address line 2 </label>
-                    <input type="text" name="address_line2" class="form-control">
-                    
-
-                    <div class="name-section">
-                        <label>City *</label>
-                        <label>State *</label>
-                    </div>
-
-                    <div class="name-section">
-                        <input type="text" name="city" class="form-control">
-                        <input type="text" name="state" class="form-control">
-                    </div>
-                    <label>Country *</label>
-                    <input type="text" name="country" class="form-control">
-                    <label>Order note</label>
-                    <textarea name="order_note" class="form-control"></textarea>
-
-               
+            <div class="name-section">
+              <label>First Name *</label>
+              <label>Last Name *</label>
             </div>
 
+            <div class="name-section">
+              <input type="text" name="first_name" class="form-control">
+              <input type="text" name="last_name" class="form-control">
+            </div>
 
+            <div class="name-section">
+              <label>Email address *</label>
+              <label>Phone number *</label>
+            </div>
 
+            <div class="name-section">
+              <input type="email" name="email" class="form-control">
+              <input type="text" name="phone" class="form-control">
+            </div>
+
+            <label>Address line 1*</label>
+            <input type="text" name="address_line1" class="form-control">
+
+            <label>Address line 2</label>
+            <input type="text" name="address_line2" class="form-control">
+
+            <div class="name-section">
+              <label>City *</label>
+              <label>State *</label>
+            </div>
+
+            <div class="name-section">
+              <input type="text" name="city" class="form-control">
+              <input type="text" name="state" class="form-control">
+            </div>
+
+            <label>Country *</label>
+            <input type="text" name="country" class="form-control">
+
+            <label>Order note</label>
+            <textarea name="order_note" class="form-control"></textarea>
+
+          </div>
         </div>
+      </div>
 
-        <!-- CHECKOUT SUMMARY -->
-        <div class="col-lg-6">
-            {% for cart_item in cart_items %}
-            <div class="checkout-container">
-                <div class="cart-item">
-                    <div class="cart-item-img">
-                        <img src="{{ cart_item.product.image.url }}" alt="">
-                    </div>
-                   
+      <!-- RIGHT: ORDER REVIEW + SUBMIT -->
+      <div class="col-lg-6">
 
-                    <div class="cart-item-info">
-                        <h5>{{ cart_item.product.product_name }}</h5>
-                        {% if cart_item.variations.all %}
-                            {% for item in cart_item.variations.all %}
-                                {{ item.variation_name | capfirst }} : {{  item.variation_value | capfirst}}<br>
-                            {% endfor %}
-                        {% endif %}
-
-                      
-                    </div>
-
-                    <div class="cart-item-qty">
-                        <h5>Quantity</h5>
-                        <p class="mx-4">{{cart_item.quantity}}</p>
-                    </div>
-
-                    <div class="cart-item-price">
-                        <h5>Price</h5>
-                        <strong>£ {{cart_item.sub_total}}</strong><br>
-                        <small>each £{{cart_item.product.price}}</small>
-                    </div>
-
-
-
-                </div>
+        {% for cart_item in cart_items %}
+        <div class="checkout-container">
+          <div class="cart-item">
+            <div class="cart-item-img">
+              <img src="{{ cart_item.product.image.url }}" alt="">
             </div>
 
-            {% endfor %}
-               
+            <div class="cart-item-info">
+              <h5>{{ cart_item.product.product_name }}</h5>
+              {% if cart_item.variations.all %}
+                {% for item in cart_item.variations.all %}
+                  {{ item.variation_name|capfirst }} : {{ item.variation_value|capfirst }}<br>
+                {% endfor %}
+              {% endif %}
+            </div>
 
+            <div class="cart-item-qty">
+              <h5>Quantity</h5>
+              <p class="mx-4">{{ cart_item.quantity }}</p>
+            </div>
+
+            <div class="cart-item-price">
+              <h5>Price</h5>
+              <strong>£ {{ cart_item.sub_total }}</strong><br>
+              <small>each £{{ cart_item.product.price }}</small>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <button class="btn order-btn w-100 mt-2" type="submit" name="submit">Place order</button>
+        <a href="{% url 'store' %}" class="btn continue-btn text-decoration-none text-dark w-100">Continue shopping</a>
 
         
-            <button class="btn order-btn" type="submit" name="submit">Place order</button>
-            <a href="{% url 'store' %}" class="btn continue-btn text-decoration-none text-dark">Continue shopping</a>
+      </div>
 
-
-        </div>
     </div>
-</form>
+  </form>
+
 </div>
 
 {% endblock %}
