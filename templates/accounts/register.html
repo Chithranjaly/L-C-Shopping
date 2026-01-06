@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="card form-card">
     <h2 class="py-3">Register</h2>
@@ -16,7 +22,7 @@
         {% endfor %}
         {{ form.email.errors }}
         {{ form.non_field_errors }}
-        <button class="btn reg_log_button">Login</button>
+        <button class="btn brown-btn">Login</button>
     </form>
 
 </div>

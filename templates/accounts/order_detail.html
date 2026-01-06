@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block extra_css %}
+<link href="{% static 'css/order_success.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 
 
@@ -74,8 +79,8 @@
 
         <!-- Total -->
         <div class="invoice-total">
-            <p style="margin-right: 100px;"><strong >Tax :</strong> £{{ order.tax}}</p>
-            <p style="margin-right: 100px;"><strong >Grand Total:</strong> £{{ subtotal}}</p>
+            <p><strong >Tax :</strong> £{{ order.tax}}</p>
+            <p><strong >Grand Total:</strong> £{{ subtotal}}</p>
         </div>
 
     </div>

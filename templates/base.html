@@ -1,162 +1,149 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L&C Shopping</title>
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <link href="{% static 'css/layout.css' %}" rel="stylesheet">    
-    <link href="{% static 'css/order_success.css' %}" rel="stylesheet">    
-    <link href="{% static 'css/product.css' %}" rel="stylesheet">
-    <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
-    <link href="{% static 'css/star.css' %}" rel="stylesheet">
-    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L&C Shopping</title>
 
-    
+  <!-- Vendor CSS first -->
+  <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Global CSS -->
+  <link href="{% static 'css/layout.css' %}" rel="stylesheet">
+  <link href="{% static 'css/shop.css' %}" rel="stylesheet">
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link href="{% static 'css/shop.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+  <!-- Page-specific CSS will be injected here -->
+  {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-    <!-- Header -->
+  <!-- Header -->
+  <header>
+    <div class="header-row px-3">
 
-    <header>
-        <div class="header-row px-3">
+      <!-- LEFT: LOGO -->
+      <div class="nav-left d-flex align-items-center">
+        <a href="{% url 'home' %}" class="text-decoration-none text-light">
+          <div class="header-logo">L&C shopping</div>
+        </a>
+      </div>
 
-            <!-- LEFT: LOGO -->
-            <div class="nav-left d-flex align-items-center">
-                <a href="{% url 'home' %}" class="text-decoration-none">
-                    <div class="header-logo">L&C shopping</div>
-                </a>
-            </div>
+      <!-- CENTER: CATEGORY + STORE + SEARCH -->
+      <div class="nav-center d-flex align-items-center gap-3">
 
-            <!-- CENTER: CATEGORY + STORE + SEARCH -->
-            <div class="nav-center d-flex align-items-center gap-3">
-
-                <!-- Categories -->
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                        Categories
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'store' %}">All category</a>
-                        {% for category in links %}
-                        <a class="dropdown-item" href="{{ category.get_url }}">
-                            {{ category.category_name }}
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Store Button -->
-                <a href="{% url 'store' %}" class="btn text-dark text-decoration-none"
-                    style="background-color: #EDE8D0;">Store</a>
-
-                <!-- Search -->
-                <form action="{% url 'search' %}" method="GET" class="form-inline d-flex">
-                    <input class="form-control mr-2" type="text" placeholder="Search" name="keyword">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-
-            </div>
-
-            <!-- RIGHT: LOGIN/REGISTER + CART ICON -->
-            <div class="nav-right text-end">
-
-                {% if user.is_authenticated %}
-
-                <!-- Line 1: Welcome -->
-                <div class="text-light mb-1">
-                    Welcome {{ user.first_name }}!
-                </div>
-
-                <!-- Line 2: Dashboard + Logout + Cart -->
-                <div class="d-flex justify-content-end align-items-center gap-3">
-                    <a href="{% url 'dashboard' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
-                        Dashboard |
-                    </a>
-
-                    <a href="{% url 'logout' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
-                        &nbsp;Logout
-                    </a>
-
-                    <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="cart-count-badge">{{ cart_count }}</span>
-                    </a>
-                </div>
-
-                {% else %}
-
-                <!-- Login/Register (same line) -->
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{% url 'login' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
-                        Login |
-                    </a>
-                    <a href="{% url 'register' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
-                        &nbsp; Register
-                    </a>
-                     <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="cart-count-badge">{{ cart_count }}</span>
-                    </a>
-                </div>
-
-                {% endif %}
-
-            </div>
-
+        <!-- Categories -->
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+            Categories
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'store' %}">All category</a>
+            {% for category in links %}
+              <a class="dropdown-item" href="{{ category.get_url }}">
+                {{ category.category_name }}
+              </a>
+            {% endfor %}
+          </div>
         </div>
-    </header>
 
+        <!-- Store Button -->
+        <a href="{% url 'store' %}" class="btn text-dark text-decoration-none" style="background-color: #EDE8D0;">
+          Store
+        </a>
 
-    <!-- content part -->
+        <!-- Search -->
+        <form action="{% url 'search' %}" method="GET" class="form-inline d-flex">
+          <input class="form-control mr-2" type="text" placeholder="Search" name="keyword">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
 
+      </div>
 
-    <main class="main-content">
-        {% block content %}{% endblock %}
-    </main>
+      <!-- RIGHT: LOGIN/REGISTER + CART ICON -->
+      <div class="nav-right text-end">
+        {% if user.is_authenticated %}
+          <div class="text-light mb-1">
+            Welcome {{ user.first_name }}!
+          </div>
 
+          <div class="d-flex justify-content-end align-items-center gap-3">
+            <a href="{% url 'dashboard' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
+              Dashboard |
+            </a>
 
+            <a href="{% url 'logout' %}" class="logReg text-decoration-none" style="color: rgb(248, 236, 170);">
+              &nbsp;Logout
+            </a>
 
-    <!-- footer part -->
-    <footer>
-        <p>Developed by Chithra</p>
-        <p>contact <a href="https://www.instagram.com/chithranjaly_chithu/" class="text-decoration-none text-light"><i
-                    class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/Chithranjaly?tab=repositories" class="text-decoration-none text-light"><i
-                    class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/chithranjaly-k-s-a28b57217/" class="text-decoration-none text-light"><i
-                    class="fa-brands fa-linkedin"></i></a>
+            <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
+              <i class="fa fa-shopping-cart" style="color: rgb(77, 77, 241);"></i>
+              <span class="cart-count-badge">{{ cart_count }}</span>
+            </a>
+          </div>
+        {% else %}
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{% url 'login' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
+              Login |
+            </a>
+            <a href="{% url 'register' %}" class="text-decoration-none" style="color: rgb(248, 236, 170);">
+              &nbsp; Register
+            </a>
+            <a href="{% url 'cart' %}" class="btn btn-md position-relative cart-btn">
+              <i class="fa fa-shopping-cart" style="color: rgb(24, 102, 170);"></i>
+              <span class="cart-count-badge">{{ cart_count }}</span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
 
-        </p>
+    </div>
+  </header>
 
-    </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('.thumb a').click(function(e) {
-            e.preventDefault();
-            $('#mainImage').attr('src',$(this).attr("href"));
-        })
-    })
-</script>
-    
+  <!-- Page content -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
 
-    
+  <!-- Footer -->
+  <footer>
+    <p>Developed by Chithra</p>
+    <p>
+      contact
+      <a href="https://www.instagram.com/chithranjaly_chithu/" class="text-decoration-none text-light">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://github.com/Chithranjaly?tab=repositories" class="text-decoration-none text-light">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/chithranjaly-k-s-a28b57217/" class="text-decoration-none text-light">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+    </p>
+  </footer>
 
+  <!-- Vendor JS (bottom is best) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- Page-specific JS -->
+  {% block extra_js %}{% endblock %}
+
+  <!-- Safe thumbnail script (won’t crash on pages without thumbnails) -->
+  <script>
+    $(document).ready(function () {
+      $('.thumb a').on('click', function (e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        if ($('#mainImage').length && href) {
+          $('#mainImage').attr('src', href);
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>

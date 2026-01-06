@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+<link href="{% static 'css/product.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="banner-jumbotron">
     <div class="container banner-c">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'home' %}" class="text-decoration-none text-dark">
             <h1 class="text1">Welcome to L&C Shopping </h1>
         </a>
 
