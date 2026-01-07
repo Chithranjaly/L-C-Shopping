@@ -31,7 +31,6 @@
           <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <p>Default URL: {% static 'images/default-user.jpg' %}</p>
 
             {% if userprofile.profile_picture %}
               <img src="{{ userprofile.profile_picture.url }}" alt="Profile picture" height="80" width="80" style="border-radius: 10px;" class="mb-3">
