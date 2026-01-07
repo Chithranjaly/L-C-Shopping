@@ -161,26 +161,51 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
+
+# Static files (CSS, JavaScript, Images)
+
 AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="us-west-2")
-AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="").strip()
+AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="")
 
-USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC)
+USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC.strip())
 
-# Always define STORAGES
-STORAGES = {
-    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
-}
+STATICFILES_DIRS = [
+    BASE_DIR / "lcshop" / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 if USE_S3_STATIC:
     AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME_STATIC
-    STORAGES["staticfiles"] = {"BACKEND": "lcshop.storages_backends.StaticStorage"}
-    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/"
-else:
-    STATIC_URL = "/static/"
-    STATICFILES_DIRS = [BASE_DIR / "lcshop" / "static"]
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_OBJECT_PARAMETERS = {}
+    AWS_LOCATION = "static"
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+    STORAGES = {
+        "staticfiles": {
+        "BACKEND": "lcshop.storages_backends.StaticStorage",
+        },
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+    }
+
+
+
+    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/{AWS_LOCATION}/"
+else:
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+    }
+    STATIC_URL = "/static/"
+
 
 
 
