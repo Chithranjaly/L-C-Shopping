@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import socket
+import os
 from decouple import config
 
 
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
     'store',
     'carts',
     'orders',
+    'storages',
     
 ]
 
@@ -156,13 +158,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'lcshop' / 'static',
-]
+AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="us-west-2")
+AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="")
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC)
+
+if USE_S3_STATIC:
+    STATICFILES_STORAGE = "lcshop.storages_backends.StaticStorage"
+    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/"
+else:
+    STATIC_URL = "/static/"
+    STATICFILES_DIRS = [
+        BASE_DIR / "lcshop" / "static",
+    ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+
+
 
 # media files configuration
 MEDIA_URL = '/media/'

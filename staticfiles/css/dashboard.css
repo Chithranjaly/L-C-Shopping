@@ -1,0 +1,57 @@
+/* =======================
+   DASHBOARD
+   ======================= */
+
+.dashboard-nav,
+.dashboard-details {
+  border-radius: 6px;
+  /* border: 1px solid #e5e5e5; */
+  /* background-color: #fff; */
+}
+
+/* Sidebar menu (scoped: safe with Bootstrap list-group) */
+.dashboard-nav .list-group-item {
+  border: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dashboard-nav .list-group-item:hover {
+  background-color: #eddaca;
+}
+
+.dashboard-nav .list-group-item.active {
+  background-color: #e6b58b;
+  font-weight: 600;
+}
+
+/* Right panel text */
+.dashboard-details h6 {
+  font-weight: 600;
+}
+
+.dashboard-details p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.dashboard-nav .logout-btn {
+    background-color: #76573b;
+    color: #fff;
+    border: none;
+  }
+  
+.dashboard-nav .logout-btn:hover {
+opacity: 0.9;
+}
+
+/* Small cards inside dashboard */
+.card-1,
+.card-2 {
+  height: auto;
+  padding: 12px;
+}
+
+
+  

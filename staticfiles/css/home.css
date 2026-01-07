@@ -1,0 +1,65 @@
+/* =======================
+   HOME PAGE
+   ======================= */
+
+/* Banner / hero */
+.banner-jumbotron {
+  min-height: 50vh;
+  background-image: url("../images/banner1.png");
+  background-size: cover;
+  background-position: center;
+  padding: 30px 0; /* spacing without "gap" look */
+  display: flex;
+  align-items: flex-start;
+}
+
+.banner-c {
+  margin-top: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  max-width: 80%;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.banner-c h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.banner-c p {
+  color: #543333;
+}
+
+/* Home heading row (title + button) */
+.home-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Home CTA button */
+.all-products {
+  background-color: #5e4d3f;
+  color: #ece8e8;
+  border: none;
+  padding: 10px 16px;
+}
+
+.all-products:hover {
+  opacity: 0.9;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .home-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .banner-c {
+    max-width: 95%;
+  }
+}

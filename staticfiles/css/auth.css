@@ -1,0 +1,31 @@
+/* =======================
+   AUTH PAGES (LOGIN/REGISTER)
+   ======================= */
+
+.card.form-card,
+.card.login-card {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgb(227, 205, 174);
+}
+
+/* buttons for login, register and pages brown-button */
+.brown-btn{
+  background-color: rgb(105, 66, 33);
+  color: white;
+}
+
+a.brown-btn {
+  background-color: rgb(105, 66, 33);
+  color: white;
+}
+
+@media (max-width: 576px) {
+    .card.form-card,
+    .card.login-card {
+      max-width: 95%;
+      margin: 20px auto;
+    }
+}
+  

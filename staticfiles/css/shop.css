@@ -1,458 +1,205 @@
 /* ===========================
-   BASE LAYOUT (base.html)
+   GLOBAL BASE (ALL PAGES)
    =========================== */
 
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background: #fffdd0;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    margin: 0;
-    padding: 0;
+:root {
+  --bg: #f8f4b4;
+  --text: #333;
+  --header-bg: #390f0fe0;
+  --footer-bg: #390f0fe3;
+  --brand: #f8e7ac;
 }
 
-a {
-    text-decoration: none; /* remove underlines globally */
-    color: inherit; /* inherit color */
-}
-a:hover {
-    text-decoration: none;
-  }
-
-header {
-    width: 100%;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.header-row {    
-    border: 1px solid rgba(57, 15, 15, 0.35); 
-    background-color: #390f0fe0;
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 
-.header-logo {
-    color: #f4f0a3;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 700;
-    font-size: 2rem;
-}
-
-.nav-center {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* added proper spacing between center elements */
-    flex-wrap: wrap;
-}
-
-.right-section,
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.cart-count-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: red;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 50%;
-}
-
-/* remove button underlines */
-button a {
-    color: inherit;
-}
-
-button a:hover {
-    text-decoration: none;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 main.main-content {
-    flex: 1;
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 16px;
 }
 
 /* ===========================
-   FOOTER
+   HEADER (base.html)
    =========================== */
+
+header {
+  width: 100%;
+}
+
+.header-row {
+  border: 1px solid rgba(57, 15, 15, 0.35);
+  background-color: var(--header-bg);
+  padding: 10px 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  color: var(--brand);
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.nav-center,
+.nav-right,
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* For cart icon badge (used in header) */
+.cart-count-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: rgb(237, 36, 36);
+  color: white;
+  font-size: 0.7rem;
+
+
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* buttons that contain <a> tags */
+button a {
+  color: inherit;
+}
+button a:hover {
+  text-decoration: none;
+}
+
+/* ===========================
+   FOOTER (base.html)
+   =========================== */
+
 footer {
-    background-color: #390f0fe3;
-    color: bisque;
-    padding: 15px 0;
-    text-align: center;
-    margin-top: auto; /* push footer to bottom if short content */
+  background-color: var(--footer-bg);
+  color: bisque;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: auto;
 }
 
 footer a {
-    color: bisque;
+  color: bisque;
 }
 
 /* ===========================
-   GLOBAL FONT SIZE
+   GLOBAL TYPE
    =========================== */
-body {
-    font-size: 1.1em; /* normal text size */
-    line-height: 1.6; /* makes text more readable */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 0 0 10px 0;
 }
 
-/* Headings */
-h1 {
-    font-size: 2.5rem;
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: .8rem; }
 
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.75rem;
-}
-
-h4 {
-    font-size: 1.5rem;
-}
-
-h5 {
-    font-size: 1.25rem;
-}
-
-h6 {
-    font-size: 1rem;
-}
-
-/* Buttons */
-button,
-.reg_log_button,
-.checkout-btn,
-.order-btn,
-.continue-btn,
-.all-products,
-.btn {
-    font-size: 1.2em;
-    padding: 10px 16px; /* slightly bigger clickable area */
-}
-
-/* Forms */
-input.form-control,
-textarea.form-control,
-select.form-control {
-    font-size: 1rem; /* readable input fields */
-}
-
-/* Smaller text elements */
 p, span, label {
-    font-size: 1rem; 
-}
-
-
-/* ===========================
-   BANNER & HOME PAGE
-   =========================== */
-/* Replace the margin-top approach */
-.banner-jumbotron {
-    height: 50vh;
-    background-image: url("../images/banner1.png");
-    background-size: cover;
-    background-position: center;
-    padding-top: 30px;          /* ✅ creates space without looking like a gap */
-}
-
-/* remove the margin that creates the “gap” look */
-.banner-c {
-    margin-top: 0;              /* ✅ */
-    background-color: rgba(255, 255, 255, 0.7);
-    max-width: 80%;
-    text-align: center;
-    padding: 15px;
-}
-
-/* optional: kill default heading top margin that can add extra spacing */
-.banner-c h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-   
-
-.banner-c p {
-    color: #543333;
-}
-
-/* Home products grid */
-.home-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-
-.all-products {
-    background-color: #5e4d3f;
-    color: #ece8e8;
+  font-size: 1rem;
 }
 
 /* ===========================
-   PRODUCT PAGES (store.html & product.html)
+   RESPONSIVE (HEADER ONLY)
    =========================== */
-.product_container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 3px solid rgb(205, 180, 180);
-}
 
-.image_side {
-    flex: 0 0 350px;
-    max-width: 350px;
-    border: 2px solid #EDE8D0;
-    padding: 10px;
-    background-color: #fff;
-}
-
-.details_side {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    border: 2px solid #EDE8D0;
-    padding: 20px;
-    background-color: #fff;
-    word-wrap: break-word;
-}
-
-.image_side img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    display: block;
-}
-
-/* store page cards */
-.card {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-/* ===========================
-   CART PAGE & CHECKOUT
-   =========================== */
-.checkout-wrapper {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.cart-item {
-    background: #f8f5e6;
-    border: 1px solid #d6c89d;
-    border-radius: 10px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: 0.2s ease;
-}
-
-.cart-item:hover {
-    transform: translateY(-3px);
-}
-
-.cart-item-img img {
-    height: 95px;
-    width: 95px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #d6c89d;
-}
-
-.cart-item-info h5 {
-    margin: 0;
-    color: #3c3025;
-}
-
-.cart-item-info p {
-    margin: 2px 0;
-    color: #5e4d3f;
-}
-
-.cart-item-qty,
-.cart-item-price {
-    text-align: center;
-}
-
-.qty-box {
-    display: flex;
-    align-items: center;
-    border: 1px solid #c9bb95;
-    border-radius: 6px;
-    overflow: hidden;
-    background: white;
-    margin: 2px 10px;
-}
-
-.qty-btn {
-    background: #e3dcc4;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.qty-btn:hover {
-    background: #d8d0b6;
-}
-
-.qty-value {
-    padding: 5px 12px;
-    font-weight: bold;
-}
-
-.remove-btn {
-    border: none;
-    background: #c54444;
-    color: white;
-    padding: 8px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.remove-btn:hover {
-    background: #a93636;
-}
-
-/* checkout summary box */
-.checkout-summary {
-    background: #faf8f2;
-    padding: 20px;
-    border: 1px solid #d6c89d;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* empty cart */
-.empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-    text-align: center;
-}
-
-/* buttons */
-.checkout-btn,
-.order-btn,
-.continue-btn {
-    width: 100%;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.checkout-btn {
-    background: #3a2f24;
-    color: #f2e7c6;
-}
-
-.checkout-btn:hover,
-.order-btn:hover,
-.continue-btn:hover {
-    opacity: 0.9;
-}
-
-/* ===========================
-   REGISTER & LOGIN PAGES
-   =========================== */
-.card.form-card,
-.card.login-card {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background: #fffdd0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.card.form-card h2,
-.card.login-card h2 {
-    text-align: center;
-}
-
-.reg_log_button {
-    width: 100%;
-    background-color: #b08565;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-}
-
-.reg_log_button:hover {
-    opacity: 0.9;
-}
-
-input.form-control {
-    width: 100%;
-}
-
-/* ===========================
-   DASHBOARD PAGE
-   =========================== */
-/* .dashboard-nav,
-.dashboard-details {
-    background-color: rgb(168, 116, 90);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 15px;
-} */
-/* 
-.nav-list {
-    list-style: none;
-    padding: 0;
-}
-
-.nav-list li {
-    background-color: #fff;
-    width: 100%;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-} */
-
-/* ===========================
-   MEDIA QUERIES
-   =========================== */
 @media (max-width: 576px) {
-    .header-row {
-        flex-direction: column;
-        text-align: center;
-    }
-    .header-logo {
-        font-size: 1.5rem;
-    }
-    .nav-center {
-        justify-content: center;
-        gap: 0.5rem;
-        margin: 10px 0;
-    }
-    .home-heading {
-        flex-direction: column;
-        align-items: start;
-    }
-    .product_container {
-        flex-direction: column;
-    }
+  .header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header-logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-center {
+    gap: 0.5rem;
+    margin: 10px 0;
+  }
+
+  /* make the search area behave */
+  .nav-center form.form-inline {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-center form.form-inline .form-control {
+    width: 100%;
+    max-width: 420px;
+    margin-right: 0 !important; /* overrides Bootstrap mr-2 */
+  }
+
+  .nav-center form.form-inline button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* right section: keep cart from floating weirdly */
+  .nav-right .d-flex {
+    justify-content: center !important;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* prevent badge from overlapping too aggressively */
+  .cart-count-badge {
+    top: -6px;
+    right: -6px;
+  }
 }
