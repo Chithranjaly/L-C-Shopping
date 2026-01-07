@@ -173,6 +173,7 @@ STORAGES = {
 }
 
 if USE_S3_STATIC:
+    AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME_STATIC
     STORAGES["staticfiles"] = {"BACKEND": "lcshop.storages_backends.StaticStorage"}
     STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/"
 else:
