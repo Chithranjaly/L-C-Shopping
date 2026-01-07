@@ -164,66 +164,101 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-
-
-# Static files (CSS, JavaScript, Images)
+# ==============================
+# STATIC & MEDIA FILES (S3)
+# ==============================
 
 AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="us-west-2")
+
+# Static bucket (already working)
 AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="")
 
-USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC.strip())
+# Media bucket (uploads)
+AWS_MEDIA_BUCKET_NAME = config("AWS_MEDIA_BUCKET_NAME", default="lcshop-media-prod")
 
+USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC.strip())
+USE_S3_MEDIA = bool(AWS_MEDIA_BUCKET_NAME.strip())
+
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False
+AWS_S3_OBJECT_PARAMETERS = {}
+
+# Local static setup (for dev)
 STATICFILES_DIRS = [
     BASE_DIR / "lcshop" / "static",
 ]
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+
+# ------------------------------
+# STORAGES
+# ------------------------------
 if USE_S3_STATIC:
-    AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME_STATIC
-    AWS_DEFAULT_ACL = None
-    AWS_QUERYSTRING_AUTH = False
-    AWS_S3_OBJECT_PARAMETERS = {}
     AWS_LOCATION = "static"
 
     STORAGES = {
         "staticfiles": {
-        "BACKEND": "lcshop.storages_backends.StaticStorage",
+            "BACKEND": "lcshop.storages_backends.StaticStorage",
         },
         "default": {
-            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "BACKEND": "lcshop.storages_backends.MediaStorage"
+            if USE_S3_MEDIA
+            else "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {
+                "bucket_name": AWS_MEDIA_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+            } if USE_S3_MEDIA else {},
         },
     }
 
+    STATIC_URL = (
+        f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3."
+        f"{AWS_S3_REGION_NAME}.amazonaws.com/{AWS_LOCATION}/"
+    )
 
-
-    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/{AWS_LOCATION}/"
 else:
     STORAGES = {
         "staticfiles": {
             "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
         "default": {
-            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "BACKEND": "lcshop.storages_backends.MediaStorage"
+            if USE_S3_MEDIA
+            else "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {
+                "bucket_name": AWS_MEDIA_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+            } if USE_S3_MEDIA else {},
         },
     }
+
     STATIC_URL = "/static/"
 
 
+# ------------------------------
+# MEDIA
+# ------------------------------
+if USE_S3_MEDIA:
+    MEDIA_URL = (
+        f"https://{AWS_MEDIA_BUCKET_NAME}.s3."
+        f"{AWS_S3_REGION_NAME}.amazonaws.com/media/"
+    )
+    MEDIA_ROOT = None
+else:
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = BASE_DIR / "media"
+
+
+# Safety fallback (helps Django 5.x edge cases)
+DEFAULT_FILE_STORAGE = (
+    "lcshop.storages_backends.MediaStorage"
+    if USE_S3_MEDIA
+    else "django.core.files.storage.FileSystemStorage"
+)
 
 
 
-
-
-# media files configuration
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
