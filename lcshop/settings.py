@@ -142,7 +142,7 @@ USE_S3_MEDIA = bool(AWS_MEDIA_BUCKET_NAME)
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
-AWS_S3_OBJECT_PARAMETERS = {"ACL": None}  # ✅ prevents AccessControlListNotSupported
+AWS_S3_OBJECT_PARAMETERS = {}  # ✅ prevents AccessControlListNotSupported
 
 # Local static setup (for dev)
 STATICFILES_DIRS = [
