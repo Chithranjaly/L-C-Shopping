@@ -12,7 +12,7 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY", default="unsafe-dev-key")
 DEBUG = config("DEBUG", cast=bool, default=False)
 
 # --- Allowed hosts ---
