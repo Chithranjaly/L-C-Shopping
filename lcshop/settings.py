@@ -53,6 +53,12 @@ except Exception:
     pass
 
 
+# CSRF_TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.elasticbeanstalk.com",
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
