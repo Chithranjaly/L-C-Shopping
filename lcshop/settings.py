@@ -158,22 +158,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="us-west-2")
-AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="")
+AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="").strip()
 
 USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC)
 
+# Always define STORAGES
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+}
+
 if USE_S3_STATIC:
-    STATICFILES_STORAGE = "lcshop.storages_backends.StaticStorage"
+    STORAGES["staticfiles"] = {"BACKEND": "lcshop.storages_backends.StaticStorage"}
     STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/"
 else:
     STATIC_URL = "/static/"
-    STATICFILES_DIRS = [
-        BASE_DIR / "lcshop" / "static",
-    ]
+    STATICFILES_DIRS = [BASE_DIR / "lcshop" / "static"]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 
 
