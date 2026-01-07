@@ -134,7 +134,7 @@ AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", defaul
 # Media bucket (uploads)
 AWS_MEDIA_BUCKET_NAME = config("AWS_MEDIA_BUCKET_NAME", default="lcshop-media-prod").strip()
 
-USE_S3_STATIC = bool(AWS_STORAGE_BUCKET_NAME_STATIC)
+USE_S3_STATIC = (not DEBUG) and bool(AWS_STORAGE_BUCKET_NAME_STATIC)
 USE_S3_MEDIA = bool(AWS_MEDIA_BUCKET_NAME)
 
 # IMPORTANT: your buckets have ACLs disabled (Bucket owner enforced)
