@@ -4,38 +4,57 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 
-class AccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, username, email, password=None):
-        if not email:
-            raise ValueError('User must have an email address')
-        if not username:
-            raise ValueError('User must have an username')
-        user = self.model(
-            email=self.normalize_email(email),
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
-        )
 
+class AccountManager(BaseUserManager):
+    def create_user(self, email, username=None, password=None, **extra_fields):
+        """
+        Creates and saves a normal user.
+        Works for both:
+        - your website registration (can pass first_name/last_name/phone/etc via extra_fields)
+        - admin/management commands
+        """
+        if not email:
+            raise ValueError("User must have an email address")
+
+        email = self.normalize_email(email)
+
+        if not username:
+            # If you want username optional, generate one from email.
+            # If you want it mandatory, replace this with a ValueError.
+            username = email.split("@")[0]
+
+        user = self.model(email=email, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, email, username, password):
-        user = self.create_user(
-            email=self.normalize_email(email),
+    def create_superuser(self, email, username=None, password=None, **extra_fields):
+        """
+        Creates and saves a superuser.
+        Ensures all admin flags are correctly set for your custom model.
+        """
+        extra_fields.setdefault("is_admin", True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superadmin", True)
+        extra_fields.setdefault("is_active", True)
+
+        # Safety checks (prevents silent mistakes)
+        if extra_fields.get("is_admin") is not True:
+            raise ValueError("Superuser must have is_admin=True.")
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superadmin") is not True:
+            raise ValueError("Superuser must have is_superadmin=True.")
+        if extra_fields.get("is_active") is not True:
+            raise ValueError("Superuser must have is_active=True.")
+
+        return self.create_user(
+            email=email,
             username=username,
             password=password,
-            first_name=first_name,
-            last_name=last_name,
+            **extra_fields
         )
 
-        user.is_admin = True
-        user.is_active = True
-        user.is_staff = True
-        user.is_superadmin = True
-        user.save(using=self._db)
-        return user
 
 
 class Account(AbstractBaseUser):
