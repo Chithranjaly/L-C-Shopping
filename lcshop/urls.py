@@ -27,7 +27,7 @@ def health(_request):
     return HttpResponse("ok", content_type="text/plain")
 
 urlpatterns = [
-    path("health/", health),
+    path("health/", health, name="health"),
     path('admin/', include('admin_honeypot.urls',namespace='admin_honeypot')),
     path('securelogin/', admin.site.urls),
     path('', views.home, name="home"),
