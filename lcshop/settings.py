@@ -100,12 +100,30 @@ WSGI_APPLICATION = "lcshop.wsgi.application"
 AUTH_USER_MODEL = "accounts.Account"
 
 # --- Database (NOTE: SQLite is not production-safe on EB; move to RDS next) ---
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+# settings.py
+
+DB_ENGINE = config("DB_ENGINE", default="sqlite")  # "sqlite" or "postgres"
+
+if DB_ENGINE == "postgres":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config("DB_NAME"),
+            "USER": config("DB_USER"),
+            "PASSWORD": config("DB_PASSWORD"),
+            "HOST": config("DB_HOST"),
+            "PORT": config("DB_PORT", default="5432"),
+        }
     }
-}
+else:
+    # local / fallback
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
 
 # --- Password validation ---
 AUTH_PASSWORD_VALIDATORS = [
