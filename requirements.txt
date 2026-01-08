@@ -4,7 +4,7 @@ botocore==1.42.23
 certifi==2026.1.4
 charset-normalizer==3.4.4
 Django==6.0
-django-admin-honeypot @ git+https://github.com/dmpayton/django-admin-honeypot@a840496d183df89965eeb33c9a5dd9ea3919dfff
+django-admin-honeypot==1.1.0
 django-admin-thumbnails==1.0.0
 django-ipware==7.0.1
 django-session-timeout==0.1.0
