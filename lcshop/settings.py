@@ -158,12 +158,10 @@ AWS_MEDIA_BUCKET_NAME = config("AWS_MEDIA_BUCKET_NAME", default="lcshop-media-pr
 USE_S3_STATIC = (not DEBUG) and bool(AWS_STORAGE_BUCKET_NAME_STATIC)
 USE_S3_MEDIA = bool(AWS_MEDIA_BUCKET_NAME)
 
-# IMPORTANT: your buckets have ACLs disabled (Bucket owner enforced)
-# So we must NOT send any ACL headers.
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = True
 AWS_S3_FILE_OVERWRITE = False
-AWS_S3_OBJECT_PARAMETERS = {}  # ✅ prevents AccessControlListNotSupported
+AWS_S3_OBJECT_PARAMETERS = {}  
 
 # Local static setup (for dev)
 STATICFILES_DIRS = [
@@ -174,7 +172,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 if USE_S3_STATIC:
     AWS_LOCATION = "static"
 
-    # ✅ Make sure django-storages has the standard bucket variable too
     AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME_STATIC
 
     STORAGES = {
@@ -239,7 +236,7 @@ MESSAGE_TAGS = {
 }
 
 # ==============================
-# EMAIL (make deploy-safe)
+# EMAIL 
 # ==============================
 
 EMAIL_HOST = config("EMAIL_HOST", default="")

@@ -7,20 +7,16 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class AccountManager(BaseUserManager):
     def create_user(self, email, username=None, password=None, **extra_fields):
-        """
-        Creates and saves a normal user.
-        Works for both:
-        - your website registration (can pass first_name/last_name/phone/etc via extra_fields)
-        - admin/management commands
-        """
+        
+
+
+        
         if not email:
             raise ValueError("User must have an email address")
 
         email = self.normalize_email(email)
 
         if not username:
-            # If you want username optional, generate one from email.
-            # If you want it mandatory, replace this with a ValueError.
             username = email.split("@")[0]
 
         user = self.model(email=email, username=username, **extra_fields)
@@ -29,10 +25,7 @@ class AccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username=None, password=None, **extra_fields):
-        """
-        Creates and saves a superuser.
-        Ensures all admin flags are correctly set for your custom model.
-        """
+        
         extra_fields.setdefault("is_admin", True)
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superadmin", True)

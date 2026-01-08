@@ -6,9 +6,9 @@ class StaticStorage(S3Boto3Storage):
     file_overwrite = True
 
 class MediaStorage(S3Boto3Storage):
-    bucket_name = "lcshop-media-prod"   # or rely on settings
+    bucket_name = "lcshop-media-prod"   
     location = "media"
     default_acl = None
     file_overwrite = False
-    querystring_auth = True   # ✅ this makes .url() produce signed URLs
+    querystring_auth = True   
 
