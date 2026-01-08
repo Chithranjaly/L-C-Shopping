@@ -102,21 +102,25 @@ AUTH_USER_MODEL = "accounts.Account"
 # --- Database (NOTE: SQLite is not production-safe on EB; move to RDS next) ---
 # settings.py
 
-DB_ENGINE = config("DB_ENGINE", default="sqlite")  # "sqlite" or "postgres"
 
-if DB_ENGINE == "postgres":
+DB_NAME = config("DB_NAME", default="")
+DB_USER = config("DB_USER", default="")
+DB_PASSWORD = config("DB_PASSWORD", default="")
+DB_HOST = config("DB_HOST", default="")
+DB_PORT = config("DB_PORT", default="5432")
+
+if DB_HOST:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": config("DB_NAME"),
-            "USER": config("DB_USER"),
-            "PASSWORD": config("DB_PASSWORD"),
-            "HOST": config("DB_HOST"),
-            "PORT": config("DB_PORT", default="5432"),
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASSWORD,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
         }
     }
 else:
-    # local / fallback
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
