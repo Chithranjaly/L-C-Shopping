@@ -32,7 +32,7 @@
             {% csrf_token %}
 
 
-            {% if userprofile.profile_picture %}
+            {% if userprofile and userprofile.profile_picture %}
               <img src="{{ userprofile.profile_picture.url }}" alt="Profile picture" height="80" width="80" style="border-radius: 10px;" class="mb-3">
             {% else %}
               <img src="{% static 'images/default-user.jpg' %}" alt="Default profile picture" height="80" width="80" style="border-radius: 10px;" class="mb-3">
