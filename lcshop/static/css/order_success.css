@@ -10,7 +10,6 @@
   padding: 0 12px;
 }
 
-/* Make the invoice area look like its own page without touching <body> */
 .success-container .invoice-card {
   background: #fff;
   padding: 30px;
@@ -99,7 +98,6 @@
     text-align: left;
   }
 
-  /* Tables are wide: allow horizontal scroll instead of breaking layout */
   .success-container .invoice-card {
     overflow-x: auto;
   }
