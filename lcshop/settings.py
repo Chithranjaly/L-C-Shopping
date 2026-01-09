@@ -153,10 +153,10 @@ AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="us-west-2")
 AWS_STORAGE_BUCKET_NAME_STATIC = config("AWS_STORAGE_BUCKET_NAME_STATIC", default="").strip()
 
 # Media bucket (uploads)
-AWS_MEDIA_BUCKET_NAME = config("AWS_MEDIA_BUCKET_NAME", default="lcshop-media-prod").strip()
+AWS_MEDIA_BUCKET_NAME = config("AWS_MEDIA_BUCKET_NAME", default="").strip()
 
 USE_S3_STATIC = (not DEBUG) and bool(AWS_STORAGE_BUCKET_NAME_STATIC)
-USE_S3_MEDIA = bool(AWS_MEDIA_BUCKET_NAME)
+USE_S3_MEDIA = (not DEBUG) and bool(AWS_MEDIA_BUCKET_NAME)
 
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = True
