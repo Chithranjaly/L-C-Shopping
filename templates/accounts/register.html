@@ -9,23 +9,79 @@
 <div class="card form-card">
     <h2 class="py-3">Register</h2>
     {% include 'alerts.html' %}
-    <form action="{% url 'register' %}" method="POST">
+    <form id="registerForm" action="{% url 'register' %}" method="POST" novalidate>
         {% csrf_token %}
+    
         {% for field in form %}
         <div class="mb-3 form-row">
             {{ field.label_tag }}
             {{ field }}
-
-
-
+    
+            {% if field.name == "password" %}
+              <small class="text-muted d-block mt-1">
+                8+ chars, include upper, lower, number, special character.
+              </small>
+            {% endif %}
+    
+            <div class="text-danger small mt-1" data-error-for="{{ field.name }}"></div>
         </div>
         {% endfor %}
-        {{ form.email.errors }}
-        {{ form.non_field_errors }}
-        <button class="btn brown-btn">Register</button>
+    
+        <button class="btn brown-btn" type="submit">Register</button>
     </form>
+    
 
 </div>
 <p class="text-center">Already have an account?<a href="{% url 'login' %}">Log in</a></p>
+<script>
+    const form = document.getElementById("registerForm");
+    const validateUrl = "{% url 'validate_register' %}";
+  
+    function setError(field, message) {
+      const errorBox = document.querySelector(`[data-error-for="${field}"]`);
+      const input = document.querySelector(`[name="${field}"]`);
+      if (!errorBox || !input) return;
+  
+      errorBox.textContent = message || "";
+      input.classList.toggle("is-invalid", !!message);
+    }
+  
+    let timers = {};
+  
+    function validateField(fieldName) {
+      const fd = new FormData(form);
+      fd.append("field", fieldName);
+  
+      fetch(validateUrl, { method: "POST", body: fd })
+        .then(res => res.json())
+        .then(data => {
+          setError(data.field, (data.errors && data.errors[0]) ? data.errors[0] : "");
+        })
+        .catch(() => {
+          // optional: ignore network errors silently
+        });
+    }
+  
+    form.querySelectorAll("input, select, textarea").forEach((input) => {
+      if (!input.name) return;
+  
+      const handler = () => {
+        clearTimeout(timers[input.name]);
+        timers[input.name] = setTimeout(() => validateField(input.name), 350);
+      };
+  
+      input.addEventListener("input", handler);
+      input.addEventListener("blur", () => validateField(input.name));
+  
+      // If password changes, re-check confirm_password live
+      if (input.name === "password") {
+        input.addEventListener("input", () => {
+          const confirm = form.querySelector('[name="confirm_password"]');
+          if (confirm && confirm.value) validateField("confirm_password");
+        });
+      }
+    });
+  </script>
+  
 
 {% endblock %}

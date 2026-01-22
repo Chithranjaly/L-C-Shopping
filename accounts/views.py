@@ -23,6 +23,9 @@ import requests
 from orders.models import Order, OrderProduct
 from django.db.models import Count
 
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
 # Create your views here.
 
 
@@ -77,7 +80,17 @@ def register(request):
     }
     return render(request, 'accounts/register.html', context)
 
+@require_POST
+def validate_register(request):
+    field = request.POST.get("field", "")
+    form = RegistrationForm(request.POST)
+    form.is_valid()
 
+    errors = form.errors.get(field, [])
+    return JsonResponse({
+        "field": field,
+        "errors": [str(e) for e in errors],
+    })
 
 def login(request):
     if request.method == 'POST':

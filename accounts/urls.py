@@ -6,6 +6,7 @@ from accounts import views
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('register/', views.register, name='register'),
+    path("ajax/validate-register/", views.validate_register, name="validate_register"),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
