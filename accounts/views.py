@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
+from accounts.services.email_service import send_activation_email
+
 from .forms import RegistrationForm,UserForm,UserProfileForm
 from .models import Account, UserProfile
 from django.contrib import messages, auth
@@ -25,10 +27,12 @@ from django.db.models import Count
 
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django_ratelimit.decorators import ratelimit
+
 
 # Create your views here.
 
-
+@ratelimit(key='user_or_ip', rate='5/m')
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -56,18 +60,7 @@ def register(request):
 
 
             # user activation
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your accont'
-            message = render_to_string('accounts/account_verification.html',{
-                'user':user,
-                'domain':current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':default_token_generator.make_token(user),
-
-            })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
+            send_activation_email(user,request)
 
 
 
@@ -91,7 +84,7 @@ def validate_register(request):
         "field": field,
         "errors": [str(e) for e in errors],
     })
-
+@ratelimit(key='user_or_ip', rate='5/m')
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -218,10 +211,10 @@ def forgot_password(request):
 
             send_email.send()
 
-            messages.success(request,"Password reset link have been send to your email id")
+            messages.success(request,"Password reset link will be send to your email if the account is registered!.")
             return redirect('login')
         else:
-            messages.error(request,"Account doesn't exist!")
+            messages.success(request,"Password reset link will be send to your email if the account is registered!.")
             return redirect('forgot_password')            
     return render(request, 'accounts/forgot_password.html')
 
