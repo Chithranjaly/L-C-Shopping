@@ -41,7 +41,12 @@ except Exception:
 
 # --- CSRF / Proxy ---
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.elasticbeanstalk.com",
+    o.strip()
+    for o in config(
+        "CSRF_TRUSTED_ORIGINS",
+        default="https://*.elasticbeanstalk.com",
+    ).split(",")
+    if o.strip()
 ]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
