@@ -1,0 +1,267 @@
+Retrieving logs...
+============= i-031753b43020022a6 ==============
+
+----------------------------------------
+/var/log/web.stdout.log
+----------------------------------------
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: [2026-06-07 20:11:46 +0000] [2230] [ERROR] Worker (pid:2234) exited with code 3.
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]: [2026-06-07 20:11:46 +0000] [2235] [ERROR] Exception in worker process
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]: Traceback (most recent call last):
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 713, in spawn_worker
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    worker.init_process()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/workers/gthread.py", line 243, in init_process
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    super().init_process()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/workers/base.py", line 136, in init_process
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    self.load_wsgi()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/workers/base.py", line 148, in load_wsgi
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    self.wsgi = self.app.wsgi()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:                ~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    self.callable = self.load()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:                    ~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    return self.load_wsgiapp()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:           ~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    return util.import_app(self.app_uri)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/util.py", line 411, in import_app
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    mod = importlib.import_module(module)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/usr/lib64/python3.13/importlib/__init__.py", line 88, in import_module
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    return _bootstrap._gcd_import(name[level:], package, level)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/current/lcshop/wsgi.py", line 16, in <module>
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    application = get_wsgi_application()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    django.setup(set_prefix=False)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/__init__.py", line 24, in setup
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    apps.populate(settings.INSTALLED_APPS)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/registry.py", line 116, in populate
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    app_config.import_models()
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/config.py", line 269, in import_models
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    self.models_module = import_module(models_module_name)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/usr/lib64/python3.13/importlib/__init__.py", line 88, in import_module
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    return _bootstrap._gcd_import(name[level:], package, level)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/admin_honeypot/models.py", line 2, in <module>
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]:    from django.utils.translation import ugettext_lazy as _
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]: ImportError: cannot import name 'ugettext_lazy' from 'django.utils.translation' (/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/utils/translation/__init__.py)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]: cannot import name 'ugettext_lazy' from 'django.utils.translation' (/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/utils/translation/__init__.py)
+Jun  7 20:11:46 ip-172-31-26-82 web[2235]: [2026-06-07 20:11:46 +0000] [2235] [INFO] Worker exiting (pid: 2235)
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: [2026-06-07 20:11:46 +0000] [2230] [ERROR] Worker (pid:2235) exited with code 3.
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: Traceback (most recent call last):
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 246, in run
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    handler()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 271, in handle_chld
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    self.reap_workers()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 641, in reap_workers
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: During handling of the above exception, another exception occurred:
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: Traceback (most recent call last):
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/bin/gunicorn", line 6, in <module>
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    sys.exit(run())
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:             ~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 66, in run
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]", prog=prog).run()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/base.py", line 235, in run
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    super().run()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/app/base.py", line 71, in run
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    Arbiter(self).run()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 254, in run
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 378, in halt
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    self.stop()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 458, in stop
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    self.reap_workers()
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    ~~~~~~~~~~~~~~~~~^^
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/gunicorn/arbiter.py", line 641, in reap_workers
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]:    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+Jun  7 20:11:46 ip-172-31-26-82 web[2230]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+
+
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+
+2026/06/07 20:11:38.487822 [INFO] Running command: systemctl show -p PartOf web.service
+2026/06/07 20:11:38.498513 [INFO] Running command: systemctl is-active web.service
+2026/06/07 20:11:38.505389 [INFO] Running command: systemctl start web.service
+2026/06/07 20:11:40.601155 [INFO] Executing instruction: start X-Ray
+2026/06/07 20:11:40.601166 [INFO] X-Ray is not enabled.
+2026/06/07 20:11:40.601169 [INFO] Executing instruction: start proxy with new configuration
+2026/06/07 20:11:40.601190 [INFO] Running command: /usr/sbin/nginx -t -c /var/proxy/staging/nginx/nginx.conf
+2026/06/07 20:11:40.653765 [INFO] nginx: [warn] could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+nginx: the configuration file /var/proxy/staging/nginx/nginx.conf syntax is ok
+nginx: configuration file /var/proxy/staging/nginx/nginx.conf test is successful
+
+2026/06/07 20:11:40.653914 [INFO] Running command: cp -rp /var/proxy/staging/nginx/* /etc/nginx
+2026/06/07 20:11:40.656963 [INFO] Running command: systemctl show -p PartOf nginx.service
+2026/06/07 20:11:40.759776 [INFO] Running command: systemctl daemon-reload
+2026/06/07 20:11:41.144605 [INFO] Running command: systemctl reset-failed
+2026/06/07 20:11:41.159723 [INFO] Running command: systemctl show -p PartOf nginx.service
+2026/06/07 20:11:41.180249 [INFO] Running command: systemctl is-active nginx.service
+2026/06/07 20:11:41.193846 [INFO] Running command: systemctl start nginx.service
+2026/06/07 20:11:41.427173 [INFO] Executing instruction: configureSqsd
+2026/06/07 20:11:41.427193 [INFO] This is a web server environment instance, skip configure sqsd daemon ...
+2026/06/07 20:11:41.427197 [INFO] Executing instruction: startSqsd
+2026/06/07 20:11:41.427200 [INFO] This is a web server environment instance, skip start sqsd daemon ...
+2026/06/07 20:11:41.427204 [INFO] Executing instruction: Track pids in healthd
+2026/06/07 20:11:41.427207 [INFO] This is an enhanced health env...
+2026/06/07 20:11:41.427220 [INFO] Running command: systemctl show -p ConsistsOf aws-eb.target | cut -d= -f2
+2026/06/07 20:11:41.441226 [INFO] nginx.service healthd.service cfn-hup.service
+
+2026/06/07 20:11:41.441261 [INFO] Running command: systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2026/06/07 20:11:41.456537 [INFO] web.service
+
+2026/06/07 20:11:41.456831 [INFO] Executing instruction: RunAppDeployPostDeployHooks
+2026/06/07 20:11:41.457012 [INFO] Executing platform hooks in .platform/hooks/postdeploy/
+2026/06/07 20:11:41.457074 [INFO] Following scripts will be executed in order: [01_collectstatic.sh]
+2026/06/07 20:11:41.457079 [INFO] Try add execution permission
+2026/06/07 20:11:41.457086 [INFO] Adding execute mode to file, original mode is 420
+2026/06/07 20:11:41.457105 [INFO] Running command: file -b /var/app/current/.platform/hooks/postdeploy/01_collectstatic.sh
+2026/06/07 20:11:41.500116 [INFO] Bourne-Again shell script, ASCII text executable, with CRLF line terminators
+
+2026/06/07 20:11:41.500142 [INFO] Hook file /var/app/current/.platform/hooks/postdeploy/01_collectstatic.sh is a text script with CRLF line endings. Converting to Unix format
+2026/06/07 20:11:41.500154 [INFO] Running command: dos2unix -s /var/app/current/.platform/hooks/postdeploy/01_collectstatic.sh
+2026/06/07 20:11:41.504614 [INFO] dos2unix: converting file /var/app/current/.platform/hooks/postdeploy/01_collectstatic.sh to Unix format...
+
+2026/06/07 20:11:41.504631 [INFO] Running script: .platform/hooks/postdeploy/01_collectstatic.sh
+2026/06/07 20:11:41.860394 [ERROR] An error occurred during execution of command [app-deploy] - [RunAppDeployPostDeployHooks]. Stop running the command. Error: Command .platform/hooks/postdeploy/01_collectstatic.sh failed with error exit status 1. Stderr:Traceback (most recent call last):
+  File "/var/app/current/manage.py", line 22, in <module>
+    main()
+    ~~~~^^
+  File "/var/app/current/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/core/management/__init__.py", line 443, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/core/management/__init__.py", line 417, in execute
+    django.setup()
+    ~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/registry.py", line 116, in populate
+    app_config.import_models()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/config.py", line 269, in import_models
+    self.models_module = import_module(models_module_name)
+                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/admin_honeypot/models.py", line 2, in <module>
+    from django.utils.translation import ugettext_lazy as _
+ImportError: cannot import name 'ugettext_lazy' from 'django.utils.translation' (/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/utils/translation/__init__.py)
+ 
+
+2026/06/07 20:11:41.860401 [INFO] Executing cleanup logic
+2026/06/07 20:11:41.860516 [INFO] CommandService Response: {"status":"FAILURE","api_version":"1.0","results":[{"status":"FAILURE","msg":"Engine execution has encountered an error.","returncode":1,"events":[{"msg":"Instance deployment used the commands in your 'Procfile' to initiate startup of your application.","timestamp":1780863095203,"severity":"INFO"},{"msg":"Instance deployment failed. For details, see 'eb-engine.log'.","timestamp":1780863101860,"severity":"ERROR"}]}]}
+
+2026/06/07 20:11:41.891030 [INFO] Platform Engine finished execution on command: app-deploy
+
+2026/06/07 20:15:59.677943 [INFO] Starting...
+2026/06/07 20:15:59.677988 [INFO] Starting EBPlatform-PlatformEngine
+2026/06/07 20:15:59.678008 [INFO] reading event message file
+2026/06/07 20:15:59.678351 [INFO] Engine received EB command cfn-hup-exec
+
+2026/06/07 20:15:59.756936 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-west-2:618867225361:stack/awseb-e-ed83yg3cea-stack/d08c2b20-62ac-11f1-8b6f-0a22b5c600cd -r AWSEBAutoScalingGroup --region eu-west-2
+2026/06/07 20:15:59.975909 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-west-2:618867225361:stack/awseb-e-ed83yg3cea-stack/d08c2b20-62ac-11f1-8b6f-0a22b5c600cd -r AWSEBBeanstalkMetadata --region eu-west-2
+2026/06/07 20:16:00.238456 [INFO] checking whether command tail-log is applicable to this instance...
+2026/06/07 20:16:00.238471 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/06/07 20:16:00.238479 [INFO] Engine command: (tail-log)
+
+2026/06/07 20:16:00.238540 [INFO] Executing instruction: GetTailLogs
+2026/06/07 20:16:00.238543 [INFO] Tail Logs...
+2026/06/07 20:16:00.239355 [INFO] Running command: tail -n 100 /var/log/web.stdout.log
+2026/06/07 20:16:00.241703 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/eb-hooks.log
+----------------------------------------
+2026/06/07 20:11:41.504640 [INFO] Running command: .platform/hooks/postdeploy/01_collectstatic.sh
+2026/06/07 20:11:41.860219 [INFO] Traceback (most recent call last):
+  File "/var/app/current/manage.py", line 22, in <module>
+    main()
+    ~~~~^^
+  File "/var/app/current/manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/core/management/__init__.py", line 443, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/core/management/__init__.py", line 417, in execute
+    django.setup()
+    ~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/registry.py", line 116, in populate
+    app_config.import_models()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/apps/config.py", line 269, in import_models
+    self.models_module = import_module(models_module_name)
+                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/admin_honeypot/models.py", line 2, in <module>
+    from django.utils.translation import ugettext_lazy as _
+ImportError: cannot import name 'ugettext_lazy' from 'django.utils.translation' (/var/app/venv/staging-LQM1lest/lib64/python3.13/site-packages/django/utils/translation/__init__.py)
+
+
+
+----------------------------------------
+/var/log/nginx/access.log
+----------------------------------------
+
+
+----------------------------------------
+/var/log/nginx/error.log
+----------------------------------------
+2026/06/07 20:11:40 [warn] 2134#2134: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2026/06/07 20:11:41 [warn] 2174#2174: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2026/06/07 20:11:41 [warn] 2175#2175: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+
+
