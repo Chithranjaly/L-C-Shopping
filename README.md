@@ -160,13 +160,6 @@ Migrations and static file collection run automatically via `.platform/hooks/pos
 
 ---
 
-## 👩‍💻 Developer
-
-**Chithranjaly** — MSc graduate building toward a software engineering career.
-
-- GitHub: [@Chithranjaly](https://github.com/Chithranjaly)
-
----
 
 ## 📄 Licence
 
